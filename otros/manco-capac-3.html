@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title></title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      margin: 0;
+    }
+
+    /* ---------- CONTENEDOR PRINCIPAL ---------- */
+    section {
+      text-align: left;
+      padding: 10px 25%;
+    }
+
+    section h1 {
+      color:#7f6000;
+      text-align: center;
+      font-size: 32px;
+      padding: 0 5% 5px;
+    }
+    
+    hr {
+      border: 0;
+      border-top: 1px solid #ccc;
+      margin: 15px 0;
+    }
+
+    /* ---------- TÍTULOS DE SECCIÓN ---------- */
+    .titulo-seccion {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 20px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 12px;
+      font-size: 20px;
+      color: #7f6000;
+    }
+
+    .toggle {
+      font-size: 18px;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+
+    .rotado {
+      transform: rotate(180deg);
+    }
+
+    /* ---------- CONTENIDO DESPLEGABLE ---------- */
+    .contenido {
+      margin-top: 10px;
+      padding-left: 20px;
+      font-weight: lighter;
+    }
+
+    .oculto {
+      display: none;
+    }
+
+    /* ---------- LISTAS Y SUBTÍTULOS ---------- */
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 5px 0 10px;
+    }
+
+    li {
+      margin: 2.5px 0;
+      padding-left: 1em; /* sangría para ítems internos */
+    }
+
+    .subtitulo {
+      font-size: 16px;
+      font-weight: bolder;
+      margin-top: 10px;
+      padding-left: 0; /* títulos sin sangría */
+    }
+
+    /* ---------- ORDEN DE PRESENTACIÓN ---------- */
+    .orden-bloque {
+      font-size: 16px;
+      line-height: 1.2;
+      color: black;
+      font-weight: lighter;
+    }
+
+    .orden-titulo {
+      font-size: 20px;
+      color: #7f6000;
+      font-weight: bold;
+      padding-bottom: 7px;
+    }
+
+    /* ---------- BLOQUES ALINEADOS ---------- */
+    .alineado {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 5px;
+      padding-left: 1em;
+    }
+
+    .fila {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .campo {
+      width: 100px; /* ancho fijo para alinear */
+      text-align: left;
+      font-weight: lighter;
+      color: black;
+    }
+
+    .valor::before {
+      content: ": ";
+      margin-left: 4px;
+    }
+
+    .valor {
+      flex: 1;
+      color: black;
+    }
+
+    /* ---------- ORDEN ALINEADOS ---------- */
+    .alineado_2 {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 5px;
+      padding-left: 1em;
+    }
+
+    .fila_2 {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .campo_2 {
+      width: 200px; /* ancho fijo para alinear */
+      text-align: left;
+      font-weight: lighter;
+      color: black;
+    }
+
+    .valor_2::before {
+      content: ": ";
+      margin-left: 4px;
+      font-weight: lighter;
+    }
+
+    .valor_2 {
+      flex: 1;
+      color: black;
+      font-weight: bolder;
+    }
+
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      section {
+        padding: 0 30px;
+      }
+      section h1 {
+      text-align: center;
+      font-size: 28px;
+      line-height: 1.25;
+      padding: 0 5%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Encabezado -->
+  <header>
+    <a href="../index.html" class="logo">
+      <img src="../img/logo.png" alt="logo">
+      <span>#CANDELARIA2026</span>
+    </a>
+
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <nav>
+      <a href="../index.html">Inicio</a>
+      <a href="../danzas.html">Danzas</a>
+      <a href="../orden.html">Orden</a>
+      <a href="https://www.tiktok.com/@bailaencandelaria" target="_blank" rel="noreferrer">
+        <img src="../img/tiktok.png" alt="TikTok" class="tiktok-icon">
+      </a>
+    </nav>
+  </header>
+  
+  <!-- Contenido principal -->
+  <main>
+    <section id="">
+      <h1></h1>
+      <hr>
+
+      <p class="descripcion" style="font-weight: lighter;">
+        Descripción corta del conjunto.
+      </p>
+
+      <div class="orden-bloque">
+        <div class="orden-titulo">ORDEN DE PRESENTACIÓN</div>
+        <div class="alineado_2">
+          <div class="fila_2"><span class="campo_2">Domingo (Estadio 1 – 97)</span><span class="valor_2" id="domingo"></span></div>
+          <div class="fila_2"><span class="campo_2">Lunes (Parada 1 – 48)</span><span class="valor_2" id="lunes"></span></div>
+          <div class="fila_2"><span class="campo_2">Martes (Parada 49 – 97)</span><span class="valor_2" id="martes"></span></div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- ENSAYOS -->
+      <div class="titulo-seccion" onclick="toggleSection('ensayos')">
+        <span>ENSAYOS</span>
+        <span id="icono-ensayos" class="toggle">▽</span>
+      </div>
+      <div id="ensayos" class="contenido oculto">
+        <div class="subtitulo">PUNO</div>
+        <ul>
+          <li>Día 01 - Día 02 - Día 03</li>
+          <li>HH:MM</li>
+          <li>Lugar</li>
+        </ul>
+
+        <div class="subtitulo">JULIACA</div>
+        <ul>
+          <li>Día 01 - Día 02 - Día 03</li>
+          <li>HH:MM</li>
+          <li>Lugar</li>
+        </ul>
+      </div>
+
+      <!-- BLOQUES -->
+      <div class="titulo-seccion" onclick="toggleSection('bloques')">
+        <span>BLOQUES</span>
+        <span id="icono-bloques" class="toggle">▽</span>
+      </div>
+      <div id="bloques" class="contenido oculto">
+        <div class="subtitulo">RESPONSABLE GENERAL</div>
+        <div class="alineado">
+          <div class="fila"><span class="campo">WhatsApp</span><span class="valor">-</span></div>
+        </div>
+
+        <div class="subtitulo">BLOQUE 01</div>
+        <div class="alineado">
+          <div class="fila"><span class="campo">WhatsApp</span><span class="valor">-</span></div>
+          <div class="fila"><span class="campo">TikTok</span><span class="valor">-</span></div>
+          <div class="fila"><span class="campo">Facebook</span><span class="valor">-</span></div>
+        </div>
+
+        <div class="subtitulo">BLOQUE 02</div>
+        <div class="alineado">
+          <div class="fila"><span class="campo">WhatsApp</span><span class="valor">-</span></div>
+          <div class="fila"><span class="campo">TikTok</span><span class="valor">-</span></div>
+          <div class="fila"><span class="campo">Facebook</span><span class="valor">-</span></div>
+        </div>
+      </div>
+
+      <!-- REDES SOCIALES -->
+      <div class="titulo-seccion" onclick="toggleSection('redes')">
+        <span>REDES SOCIALES</span>
+        <span id="icono-redes" class="toggle">▽</span>
+      </div>
+      <div id="redes" class="contenido oculto">
+        <div class="alineado">
+          <div class="fila"><span class="campo">TikTok</span><span class="valor">-</span></div>
+          <div class="fila"><span class="campo">Facebook</span><span class="valor">-</span></div>
+          <div class="fila"><span class="campo">Instagram</span><span class="valor">-</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Script para desplegables -->
+  <script>
+    function toggleSection(id) {
+      const section = document.getElementById(id);
+      const icon = document.getElementById('icono-' + id);
+      section.classList.toggle('oculto');
+      icon.classList.toggle('rotado');
+    }
+  </script>
+
+  <!-------- TABLA DE DATOS -------->
+  <script>
+    const tablageneral = [
+        { domingo: 1, lunes: " ", martes: 85, nombre: "ASOCIACION CULTURAL DIABLADA CONFRATERNIDAD HUASCAR",id: "d-huascar", ruta: "diabladas/huascar" },
+        { domingo: 2, lunes: " ", martes: 88, nombre: "CENTRO CULTURAL MELODIAS EL COLLAO - ILAVE",id: "melodias-ilave", ruta: "sikuris-ub/melodias-ilave" },
+        { domingo: 3, lunes: " ", martes: 97, nombre: "LA GRAN CONFRATERNIDAD LLAMERADA VIRGEN DE LA CANDELARIA CENTRAL PUNO - LA GRAN COLLAVIC - PUNO",id: "collavic", ruta: "llameradas/collavic" },
+        { domingo: 4, lunes: " ", martes: 92, nombre: "MORENADA SAN MARTIN",id: "san-martin", ruta: "morenadas/san-martin" },
+        { domingo: 5, lunes: " ", martes: 89, nombre: "ASOCIACION FOLKLORICA ANDINO AMAZONICO TOBAS CENTRAL PERU",id: "t-central", ruta: "tobas/central" },
+        { domingo: 6, lunes: " ", martes: 95, nombre: "ASOCIACION ROMEOS DE CANDELARIA",id: "romeos", ruta: "caporales/romeos" },
+        { domingo: 7, lunes: " ", martes: 94, nombre: "CONJUNTO DE DANZAS ALTIPLANICAS DE LA UNI (TUNTUNA UNI)",id: "tuntuna-uni", ruta: "caporales/tuntuna-uni" },
+        { domingo: 8, lunes: " ", martes: 93, nombre: "ASOCIACION CULTURAL INCOMPARABLE GRAN DIABLADA AMIGOS DE LA PNP",id: "pnp", ruta: "diabladas/pnp" },
+        { domingo: 9, lunes: " ", martes: 87, nombre: "CENTRO CULTURAL SENTIMIENTO SIKURIS LAS VICUNAS DE LA INMACULADA - LAMPA",id: "immaculada-lampa", ruta: "sikuris-vb/immaculada-lampa" },
+        { domingo: 10, lunes: " ", martes: 91, nombre: "GRAN MORENADA SALCEDO",id: "salcedo", ruta: "morenadas/salcedo" },
+        { domingo: 11, lunes: " ", martes: 86, nombre: "CONFRATERNIDAD CENTRAL TOBAS SUR",id: "t-sur", ruta: "tobas/sur" },
+        { domingo: 12, lunes: " ", martes: 90, nombre: "ASOCIACION JUVENIL PUNO SICURIS 27 DE JUNIO (AJP)",id: "27-jun-ajp", ruta: "sikuris-vb/27-jun-ajp" },
+        { domingo: 13, lunes: " ", martes: 96, nombre: "CONFRATERNIDAD PODEROSA Y ESPECTACULAR MORENADA SAN VALENTIN - ILAVE",id: "m-san-valentin", ruta: "morenadas/san-valentin" },
+        { domingo: 14, lunes: 1, martes: " ", nombre: "CONJUNTO DE ZAMPOÑAS Y DANZAS UNI",id: "zamponas-uni", ruta: "sikuris-ub/zamponas-uni" },
+        { domingo: 15, lunes: " ", martes: 58, nombre: "CONJUNTO CLASIFICADO SALIDA DE MANCO CAPAC Y MAMA OCLLO 2025",id: "manco-capac-2", ruta: "otros/manco-capac-1" },
+        { domingo: 16, lunes: 43, martes: " ", nombre: "SOCIEDAD DE EXPRESION CULTURAL SIKURIS WARA WARA WAYRAS HUATASANI - HUANCANE",id: "www-huatasani", ruta: "sikuris-vb/www-huatasani" },
+        { domingo: 17, lunes: 19, martes: " ", nombre: "ESCUELA DE ARTE \"JOSE CARLOS MARIATEGUI\" ZAMBOS TUNDIQUES",id: "tundiques", ruta: "caporales/tundiques" },
+        { domingo: 18, lunes: " ", martes: 55, nombre: "CONFRATERNIDAD DIABLADA SAN ANTONIO",id: "san-antonio", ruta: "diabladas/san-antonio" },
+        { domingo: 19, lunes: " ", martes: 68, nombre: "ASOCIACION DE EXPRESION CULTURAL JUVENIL 29 DE SEPTIEMBRE - ILAVE",id: "29-sep-ilave", ruta: "sikuris-ub/29-sep-ilave" },
+        { domingo: 20, lunes: 47, martes: " ", nombre: "CONJUNTO FOLKLORICO MORENADA ORKAPATA",id: "orkapata", ruta: "morenadas/orkapata" },
+        { domingo: 21, lunes: " ", martes: 81, nombre: "CAPORALES CENTRO CULTURAL ANDINO",id: "centro-cultural", ruta: "caporales/centro-cultural" },
+        { domingo: 22, lunes: " ", martes: 80, nombre: "CONJUNTO DE MUSICOS Y DANZAS AUTOCTONAS \"WIÑAY QHANTATI\" URURI CONIMA",id: "winay-q-ururi", ruta: "sikuris-vb/winay-q-ururi" },
+        { domingo: 23, lunes: " ", martes: 65, nombre: "MORENADA HUAJSAPATA",id: "huajsapata", ruta: "morenadas/huajsapata" },
+        { domingo: 24, lunes: 39, martes: " ", nombre: "CONJUNTO FOLKLORICO LA LLAMERADA DEL CLUB JUVENIL ANDINO DE LAMPA",id: "juvenil-andino", ruta: "llameradas/juvenil-andino" },
+        { domingo: 25, lunes: 3, martes: " ", nombre: "AGRUPACION DE SIKURIS RAICES AYMARAS - ILAVE \"ASIKUR\"",id: "asikur-ilave", ruta: "sikuris-vb/asikur-ilave" },
+        { domingo: 26, lunes: 48, martes: " ", nombre: "ASOCIACION FOLKLORICA DIABLADA AZOGUINI",id: "d-azoguini", ruta: "diabladas/azoguini" },
+        { domingo: 27, lunes: " ", martes: 82, nombre: "CONFRATERNIDAD MORENADA SANTA ROSA - PUNO",id: "m-santa-rosa", ruta: "morenadas/santa-rosa" },
+        { domingo: 28, lunes: 9, martes: " ", nombre: "ASOCIACION FOLKLORICA CAPORALES SAN VALENTIN",id: "c-san-valentin", ruta: "caporales/san-valentin" },
+        { domingo: 29, lunes: 23, martes: " ", nombre: "GRUPO DE ARTE 14 DE SEPTIEMBRE - MOHO",id: "14-sep-moho", ruta: "sikuris-vb/14-sep-moho" },
+        { domingo: 30, lunes: " ", martes: 77, nombre: "CONJUNTO DE ARTE Y FOLKLORE SICURIS JUVENTUD OBRERA",id: "juventud-obrera", ruta: "sikuris-ub/juventud-obrera" },
+        { domingo: 31, lunes: 37, martes: " ", nombre: "MORENADA CENTRAL GALENO - DR. RICARDO J. RUELAS RODRIGUEZ",id: "galeno", ruta: "morenadas/galeno" },
+        { domingo: 32, lunes: " ", martes: 54, nombre: "ASOCIACION FOLKLORICA CAPORALES \"SAMBOS CON SENTIMIENTO Y DEVOCION PORTEÑO\"",id: "sambos-porteno", ruta: "caporales/sambos-porteno" },
+        { domingo: 33, lunes: " ", martes: 51, nombre: "REY MORENO LAYKAKOTA",id: "rm-laykakota", ruta: "morenadas/rm-laykakota" },
+        { domingo: 34, lunes: " ", martes: 49, nombre: "ASOCIACION CULTURAL SANGRE INDOMABLE - AZANGARO",id: "indomable-azangaro", ruta: "sikuris-vb/indomable-azangaro" },
+        { domingo: 35, lunes: " ", martes: 78, nombre: "PODEROSA ESPECTACULAR WACA WACA ALTO PUNO",id: "alto-puno", ruta: "waca-wacas/alto-puno" },
+        { domingo: 36, lunes: " ", martes: 56, nombre: "COFRADIA DE NEGRITOS CHACON BEATERIO DE HUANUCO",id: "huanuco", ruta: "otros/huanuco" },
+        { domingo: 37, lunes: 6, martes: " ", nombre: "MORENADA VIRGEN DE LA CANDELARIA - MANDACHITOS",id: "mandachitos", ruta: "morenadas/mandachitos" },
+        { domingo: 38, lunes: 18, martes: " ", nombre: "EXPRESION CULTURAL MILENARIOS DE SIKURIS INTERNACIONAL LOS ROSALES ROSASPATA - HUANCANE",id: "rosales-rosaspata", ruta: "sikuris-vb/rosales-rosaspata" },
+        { domingo: 39, lunes: " ", martes: 66, nombre: "ASOCIACION LA VOZ CULTURAL KHANTUS 13 DE MAYO - DISTRITO HUAYRAPATA",id: "13-may-huayrapata", ruta: "sikuris-vb/13-may-huayrapata" },
+        { domingo: 40, lunes: 40, martes: " ", nombre: "ESCUELA INTERNACIONAL DEL FOLKLORE CAPORALES DEL SUR PUNO",id: "c-sur", ruta: "caporales/sur" },
+        { domingo: 41, lunes: " ", martes: 64, nombre: "ASOCIACION CULTURAL KULLAHUADA VIRGEN MARIA DE LA CANDELARIA",id: "candelaria", ruta: "kullawadas/candelaria" },
+        { domingo: 42, lunes: 10, martes: " ", nombre: "WACA WACA DEL BARRIO PORTEÑO",id: "w-porteno", ruta: "waca-wacas/porteno" },
+        { domingo: 43, lunes: " ", martes: 76, nombre: "ASOCIACION FOLKLORICA \"CAPORALES VICTORIA\" - PUNO",id: "c-victoria", ruta: "caporales/victoria" },
+        { domingo: 44, lunes: " ", martes: 83, nombre: "ASOCIACION DE ZAMPONISTAS Y DANZAS AUTOCTONAS SAN FRANCISCO DE BORJA - YUNGUYO",id: "sf-borja-yunguyo", ruta: "sikuris-ub/sf-borja-yunguyo" },
+        { domingo: 45, lunes: 45, martes: " ", nombre: "AGRUPACION CULTURAL MILENARIA DE SIKURIS INTERNACIONAL HUARIHUMA ROSASPATA - HUANCANE",id: "huarihuma-rosaspata", ruta: "sikuris-vb/huarihuma-rosaspata" },
+        { domingo: 46, lunes: 2, martes: " ", nombre: "CONJUNTO CLASIFICADO SALIDA DE MANCO CAPAC Y MAMA OCLLO 2025",id: "manco-capac-3", ruta: "otros/manco-capac-2" },
+        { domingo: 47, lunes: " ", martes: 70, nombre: "TRADICIONAL DIABLADA PORTEÑO",id: "d-porteno", ruta: "diabladas/porteno" },
+        { domingo: 48, lunes: 16, martes: " ", nombre: "TRADICIONAL REY MORENO SAN ANTONIO",id: "rm-san-antonio", ruta: "morenadas/rm-san-antonio" },
+        { domingo: 49, lunes: " ", martes: 57, nombre: "CONFRATERNIDAD CULTURAL WACAS PUNO",id: "wacas", ruta: "waca-wacas/wacas" },
+        { domingo: 50, lunes: 42, martes: " ", nombre: "ASOCIACION MORENADA PORTEÑO",id: "m-porteno", ruta: "morenadas/porteno" },
+        { domingo: 51, lunes: " ", martes: 59, nombre: "AGRUPACION SOCIEDAD CULTURAL AUTOCTONO SIKURIS WILA MARCA DE CONIMA",id: "wila-marca", ruta: "sikuris-vb/wila-marca" },
+        { domingo: 52, lunes: " ", martes: 73, nombre: "ASOCIACION FOLKLORICA TINKUS SEÑOR DE MACHALLATA",id: "machallata", ruta: "tinkus/machallata" },
+        { domingo: 53, lunes: 5, martes: " ", nombre: "ASOCIACION CULTURAL ZAMPONISTAS LACUSTRE DEL BARRIO JOSE ANTONIO ENCINAS",id: "lacustre-jae", ruta: "sikuris-ub/lacustre-jae" },
+        { domingo: 54, lunes: " ", martes: 67, nombre: "ASOCIACION CULTURAL CAPORALES CENTRALISTAS PUNO",id: "centralistas", ruta: "caporales/centralistas" },
+        { domingo: 55, lunes: 26, martes: " ", nombre: "AUTENTICOS AYARACHIS TAWANTIN AYLLU CUYO CUYO - SANDIA",id: "cuyo-cuyo", ruta: "ayarachis/cuyo-cuyo" },
+        { domingo: 56, lunes: 36, martes: " ", nombre: "ASOCIACION FOLCLORICA ESPECTACULAR DIABLADA BELLAVISTA",id: "d-bellavista", ruta: "diabladas/bellavista" },
+        { domingo: 57, lunes: " ", martes: 71, nombre: "SOCIEDAD CENTRO SOCIAL DE FOLKLORE Y CULTURA: SIKURIS Y DANZAS AUTOCTONAS \"FUNDACION POKOPAKA\" DE HUANCANE",id: "pokopaka-huancane", ruta: "sikuris-vb/pokopaka-huancane" },
+        { domingo: 58, lunes: 17, martes: " ", nombre: "AGRUPACION KULLAHUADA VICTORIA",id: "k-victoria", ruta: "kullawadas/victoria" },
+        { domingo: 59, lunes: " ", martes: 53, nombre: "ASOCIACION CULTURAL DE SIKURIS INTERCONTINENTALES AYMARAS DE HUANCANE",id: "intercontinentales-huancane", ruta: "sikuris-vb/intercontinentales-huancane" },
+        { domingo: 60, lunes: " ", martes: 52, nombre: "ASOCIACION CULTURAL ECOLOGISTA ETNIAS AMAZONICAS DEL PERU - BIODANZA",id: "biodanza", ruta: "tobas/biodanza" },
+        { domingo: 61, lunes: 35, martes: " ", nombre: "ASOCIACION DE ARTE, CULTURA Y FOLKLORE CAPORALES DE SIEMPRE - PITONES",id: "pitones", ruta: "caporales/pitones" },
+        { domingo: 62, lunes: " ", martes: 79, nombre: "CONFRATERNIDAD MORENADA INTOCABLES JULIACA MIA",id: "juliaca-mia", ruta: "morenadas/juliaca-mia" },
+        { domingo: 63, lunes: 8, martes: " ", nombre: "ASOCIACION CULTURAL DE SIKURIS LOS AYMARAS DE HUANCANE",id: "aymaras-huancane", ruta: "sikuris-vb/aymaras-huancane" },
+        { domingo: 64, lunes: 15, martes: " ", nombre: "CONJUNTO DE ZAMPOÑAS \"EXPRESION CULTURAL\" DEL CENTRO POBLADO DE OCOÑA - ILAVE",id: "ocona-ilave", ruta: "sikuris-ub/ocona-ilave" },
+        { domingo: 65, lunes: " ", martes: 74, nombre: "CONJUNTO \"REY CAPORAL INDEPENDENCIA\" - PUNO",id: "rc-independencia", ruta: "morenadas/rc-independencia" },
+        { domingo: 66, lunes: 38, martes: " ", nombre: "ASOCIACION FOLKLORICA WACA WACA SANTA ROSA",id: "w-santa-rosa", ruta: "waca-wacas/santa-rosa" },
+        { domingo: 67, lunes: " ", martes: 60, nombre: "ASOCIACION CULTURAL FOLKLORICA CAPORALES HUASCAR",id: "c-huascar", ruta: "caporales/huascar" },
+        { domingo: 68, lunes: 27, martes: " ", nombre: "MORENADA LAYKAKOTA",id: "laykakota", ruta: "morenadas/laykakota" },
+        { domingo: 69, lunes: 14, martes: " ", nombre: "CONJUNTO FOLKLORICO LOS CAPORALES DELA TUNTUNA DEL BARRIO MIRAFLORES CATUMI - PUNO",id: "catumi", ruta: "caporales/catumi" },
+        { domingo: 70, lunes: 22, martes: " ", nombre: "AGRUPACION SANGRE CHUMBIVILCANA - DANZA HUAYLIA CHUMBIVILCANA - CUSCO",id: "chumbivilcas", ruta: "otros/chumbivilcas" },
+        { domingo: 71, lunes: 31, martes: " ", nombre: "FRATERNIDAD ARTISTICA SAMBOS CAPORALES SEÑOR DE QOILLOR - RITTY",id: "qoillor-ritty", ruta: "caporales/qoillor-ritty" },
+        { domingo: 72, lunes: 34, martes: " ", nombre: "CONJUNTO SIKURIS 15 DE MAYO DE CAMBRIA - CONIMA",id: "15-may-cambria", ruta: "sikuris-vb/15-may-cambria" },
+        { domingo: 73, lunes: 21, martes: " ", nombre: "DIABLADA CONFRATERNIDAD VICTORIA",id: "d-victoria", ruta: "diabladas/victoria" },
+        { domingo: 74, lunes: 25, martes: " ", nombre: "AGRUPACION DE ZAMPOÑISTAS DEL ALTIPLANO DEL BARRIO HUAJSAPATA - PUNO",id: "altiplano-huajsapata", ruta: "sikuris-ub/altiplano-huajsapata" },
+        { domingo: 75, lunes: 24, martes: " ", nombre: "ASOCIACION CULTURAL FOLKLORICA \"LEGADO CAPORAL\"",id: "legado", ruta: "caporales/legado" },
+        { domingo: 76, lunes: " ", martes: 72, nombre: "AUTENTICOS AYARACHIS DE ANTALLA PALCA - LAMPA",id: "antalla-palca", ruta: "ayarachis/antalla-palca" },
+        { domingo: 77, lunes: 32, martes: " ", nombre: "ASOCIACION CULTURAL FOLKLORICA TOBAS AMAZONAS ANATA",id: "anata", ruta: "tobas/anata" },
+        { domingo: 78, lunes: 12, martes: " ", nombre: "ASOCIACION CULTURAL \"MORENADA AZOGUINI\"",id: "m-azoguini", ruta: "morenadas/azoguini" },
+        { domingo: 79, lunes: 28, martes: " ", nombre: "CENTRO SOCIAL KULLAWADA CENTRAL PUNO",id: "k-central", ruta: "kullawadas/central" },
+        { domingo: 80, lunes: " ", martes: 63, nombre: "ASOCIACION DE ARTE Y FOLCLORE CAPORALES SAN JUAN BAUTISTA - PUNO",id: "san-juan", ruta: "caporales/san-juan" },
+        { domingo: 81, lunes: 30, martes: " ", nombre: "CONJUNTO CLASIFICADO SALIDA DE MANCO CAPAC Y MAMA OCLLO 2025",id: "manco-capac-1", ruta: "otros/manco-capac-3" },
+        { domingo: 82, lunes: 41, martes: " ", nombre: "CENTENARIO CONJUNTO SICURIS DEL BARRIO MAÑAZO",id: "manazo", ruta: "sikuris-ub/manazo" },
+        { domingo: 83, lunes: 29, martes: " ", nombre: "AGRUPACION CULTURAL SICURIS \"CLAVELES ROJOS\" DE HUANCANE",id: "claveles-rojos", ruta: "sikuris-vb/claveles-rojos" },
+        { domingo: 84, lunes: 4, martes: " ", nombre: "FRATERNIDAD CAPORALES VIRGEN DE LA CANDELARIA \"VIENTOS DEL SUR\"",id: "vientos-sur", ruta: "caporales/vientos-sur" },
+        { domingo: 85, lunes: " ", martes: 62, nombre: "PODEROSA Y ESPECTACULAR MORENADA BELLAVISTA",id: "m-bellavista", ruta: "morenadas/bellavista" },
+        { domingo: 86, lunes: " ", martes: 84, nombre: "ASOCIACION CULTURAL DE SICURIS PROYECTO PARIWANAS DE HUANCANE",id: "pariwanas-huancane", ruta: "sikuris-vb/pariwanas-huancane" },
+        { domingo: 87, lunes: " ", martes: 69, nombre: "ASOCIACION CULTURAL GENUINOS AYARACHIS DE PARATIA - LAMPA",id: "paratia", ruta: "ayarachis/paratia" },
+        { domingo: 88, lunes: " ", martes: 50, nombre: "CONJUNTO DE ZAMPONISTAS JUVENTUD PAXA \"JUPAX\"",id: "jupax", ruta: "sikuris-ub/jupax" },
+        { domingo: 89, lunes: 33, martes: " ", nombre: "CONJUNTO MORENADA \"RICARDO PALMA\"",id: "ricardo-palma", ruta: "morenadas/ricardo-palma" },
+        { domingo: 90, lunes: " ", martes: 75, nombre: "ASOCIACION JUVENIL CABANILLAS SIKURIS AJC",id: "ajc-cabanillas", ruta: "sikuris-vb/ajc-cabanillas" },
+        { domingo: 91, lunes: 7, martes: " ", nombre: "ASOCIACION FOLKLORICA DIABLADA \"CENTINELAS DEL ALTIPLANO\"",id: "centinelas", ruta: "diabladas/centinelas" },
+        { domingo: 92, lunes: 46, martes: " ", nombre: "ASOCIACION FOLKLORICA VIRGEN DE LA CANDELARIA - AFOVIC",id: "afovic", ruta: "caporales/afovic" },
+        { domingo: 93, lunes: 20, martes: " ", nombre: "FABULOSA MORENADA INDEPENDENCIA",id: "independencia", ruta: "morenadas/independencia" },
+        { domingo: 94, lunes: " ", martes: 61, nombre: "TALLER DE ARTE, MUSICA Y DANZA \"REAL ASUNCION\" - JULI",id: "r-asuncion-juli", ruta: "sikuris-ub/r-asuncion-juli" },
+        { domingo: 95, lunes: 11, martes: " ", nombre: "JUVENTUD TINKUS DEL BARRIO PORTEÑO",id: "t-porteno", ruta: "tinkus/porteno" },
+        { domingo: 96, lunes: 13, martes: " ", nombre: "CONJUNTO DE DANZAS Y MUSICA AUTOCTONA QHANTATI URURI DE CONIMA",id: "qhantati-ururi", ruta: "sikuris-vb/qhantati-ururi" },
+        { domingo: 97, lunes: 44, martes: " ", nombre: "CENTRO UNIVERSITARIO DE FOLKLORE Y EL CONJUNTO DE ZAMPONAS DE LA UNIVERSIDAD NACIONAL MAYOR DE SAN MARCOS ICZSMI",id: "unmsm-iczsmi", ruta: "sikuris-vb/unmsm-iczsmi" },
+        { domingo: "Exhibición", lunes: "Exhibición", martes: " ", nombre: "ASOCIACION CULTURAL CAPORALES MI VIEJO SJ",id: "viejo-sj", ruta: "caporales/viejo-sj" },
+        { domingo: "Exhibición", lunes: "Exhibición", martes: " ", nombre: "CONJUNTO DE SIKURIS GLORIOSO SAN CARLOS",id: "glorioso", ruta: "sikuris-ub/glorioso" },
+        { domingo: "Exhibición", lunes: " ", martes: "Exhibición", nombre: "MORENADA CENTRAL PUNO",id: "m-central", ruta: "morenadas/central" },
+        { domingo: "Exhibición", lunes: "Exhibición", martes: " ", nombre: "ORGANIZACION CULTURAL ARMONIA DE VIENTOS HUJ MAYA",id: "hujmaya", ruta: "sikuris-vb/hujmaya" },
+        { domingo: "Exhibición", lunes: "Exhibición", martes: " ", nombre: "WIFALAS SAN FRANCISCO JAVIER DE MUÑANI (Campeon en Danzas Originarios 2025)",id: "wifalas-2025", ruta: "otros/wifalas-2025" },
+    ];
+
+    // -------- DETECTAR EL NOMBRE DEL ARCHIVO --------
+    const currentPage = window.location.pathname.split("/").pop().replace(".html", "");
+    const datos = tablageneral.find(m => m.id === currentPage);
+
+    // -------- RELLENAR DATOS --------
+    if (datos) {
+      document.title = datos.nombre;
+      const section = document.querySelector("section");
+      section.id = datos.id;
+      section.querySelector("h1").textContent = datos.nombre;
+      document.getElementById("domingo").textContent = datos.domingo;
+      document.getElementById("lunes").textContent = datos.lunes;
+      document.getElementById("martes").textContent = datos.martes || "";
+    }
+  </script>
+
+  <!-- Pie -->
+  <footer>
+    <p>#CANDELARIA2026</p>
+    <p>bailaencandelaria@gmail.com</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

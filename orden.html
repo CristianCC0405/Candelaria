@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Orden - #CANDELARIA2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+    <style>
+    /* === ESTILOS EXCLUSIVOS DE LA TABLA === */
+    #order {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 20px auto;
+      width: 60%;
+      max-width: 900px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .buttons button {
+      background-color: white;
+      color: #7f6000;
+      border: 2px solid #7f6000;
+      padding: 8px 0;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 'Lato', sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 6px;
+      transition: all 0.2s;
+      width: 100px; /* 👈 ancho fijo para los tres botones */
+      text-align: center;
+    }
+    .buttons button.active {
+      background-color: #7f6000;
+      color: white;
+    }
+
+    #searchBox{
+      border: 2px solid #7f6000;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 14px;
+      font-family: 'Lato', sans-serif;
+      outline: none;
+      margin-left: auto;
+      flex: 1;
+      max-width: 250px;
+    }
+
+    button {
+      background-color: white;
+      color: #7f6000;
+      border: 2px solid #7f6000;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 'Lato', sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    button.active {
+      background-color: #7f6000;
+      color: white;
+    }
+    
+    #buscador {
+      border: 2px solid #7f6000;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 14px;
+      font-family: 'Lato', sans-serif;
+      outline: none;
+      flex: 1;
+      width: 250px;
+      max-width: 250px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    table {
+      width: 60%;
+      max-width: 900px;
+      border-collapse: collapse;
+      font-size: 14px;
+      font-weight: lighter;
+      margin: 0 auto 40px auto;
+      border: 2px solid #7f6000;
+
+    }
+    th, td {
+      border-bottom: 1px solid #7f6000;
+      text-align: center;
+      padding: 10px;
+      border-right: 1px solid #7f6000;
+    }
+
+    th:nth-child(5),
+    th:nth-child(6),
+    th:nth-child(7),
+    td:nth-child(5),
+    td:nth-child(6),
+    td:nth-child(7) {
+      width: 70px; /* 👈 ancho fijo para DOM, LUN, MAR */
+    }
+
+    th:last-child, td:last-child { border-right: none; }
+    tr:last-child td { border-bottom: 2px solid #7f6000; }
+    
+    th {
+      background-color: #7f6000;
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) { background: #f9f9f9; }
+    tr:hover { background: #fff2cc; transition: background 0.2s ease; }
+
+    /* Columna "CONJUNTO" alineada a la izquierda */
+    td:last-child {
+      text-align: left;
+      padding-left: 12px;
+    }
+
+    td a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    td a:hover {
+      color: #7f6000;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .controls {
+        width: 90%;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .buttons {
+        justify-content: center;
+        width: 100%;
+      }
+      .buttons button{
+        width: 90px;
+      }
+      #buscador {
+        width: 287px;
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+      }
+      table {
+        width: 90%;
+        font-size: 14px;
+      }
+      /* 🔹 Reducir ancho de columnas DOM/LUN/MAR solo en celular */
+      th:nth-child(5),
+      th:nth-child(6),
+      th:nth-child(7),
+      td:nth-child(5),
+      td:nth-child(6),
+      td:nth-child(7) {
+        width: 45px; /* 👈 antes eran 70px, ahora más angostas */
+        padding: 6px;
+      }
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <!-- Encabezado (reutilizado del index) -->
+  <header>
+    <a href="index.html" class="logo">
+      <img src="img/logo.png" alt="logo">
+      <span>#CANDELARIA2026</span>
+    </a>
+
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="danzas.html">Danzas</a>
+      <a href="orden.html">Orden</a>
+      <a href="https://www.tiktok.com/@bailaencandelaria" target="_blank" rel="noreferrer">
+        <img src="img/tiktok.png" alt="TikTok" class="tiktok-icon">
+      </a>
+    </nav>
+  </header>
+
+  <!-- Contenido principal -->
+  <main>
+    <section id="orden">
+      <h1>ORDEN</h1>
+      <p>¡ORDENA SEGÚN TU PREFERENCIA!</p>
+
+      <div class="controls">
+        <div class="buttons">
+          <button id="domingo" class="active" onclick="sortTable(0, this)">Domingo</button>
+          <button id="lunes" onclick="sortTable(1, this)">Lunes</button>
+          <button id="martes" onclick="sortTable(2, this)">Martes</button>
+        </div>
+        <input type="text" id="buscador" placeholder="Buscar conjunto ...">
+      </div>
+       <div class="table-container">
+        <table id="GeneralOrdenTable">
+          <thead>
+            <tr>
+              <th class="hidden">Orden Real 08</th>
+              <th class="hidden">Orden Real 09</th>
+              <th class="hidden">Orden Real 10</th>
+              <th class="hidden">Categoría</th>
+              <th>DOM</th>
+              <th>LUN</th>
+              <th>MAR</th>
+              <th>CONJUNTO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="hidden">0.1</td><td class="hidden">0.1</td><td class="hidden">100.1</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>-</td><td>-</td><td></td><td><a href="sikuris-vb\hujmaya.html">ORGANIZACION CULTURAL ARMONIA DE VIENTOS HUJ MAYA</a></td></tr>
+            <tr><td class="hidden">0.2</td><td class="hidden">0.2</td><td class="hidden">100.2</td><td class="hidden">SIKURIS UN SOLO BOMBO</td><td>-</td><td>-</td><td></td><td><a href="sikuris-ub\glorioso.html">CONJUNTO DE SIKURIS GLORIOSO SAN CARLOS</a></td></tr>
+            <tr><td class="hidden">1</td><td class="hidden">185</td><td class="hidden">85</td><td class="hidden">DIABLADA</td><td>1</td><td></td><td>85</td><td><a href="diabladas\d-huascar.html">ASOCIACION CULTURAL DIABLADA CONFRATERNIDAD HUASCAR</a></td></tr>
+            <tr><td class="hidden">2</td><td class="hidden">188</td><td class="hidden">88</td><td class="hidden">SIKURIS UN SOLO BOMBO</td><td>2</td><td></td><td>88</td><td><a href="sikuris-ub\melodias-ilave.html">CENTRO CULTURAL MELODIAS EL COLLAO - ILAVE</a></td></tr>
+            <tr><td class="hidden">3</td><td class="hidden">197</td><td class="hidden">97</td><td class="hidden">LLAMERADA</td><td>3</td><td></td><td>97</td><td><a href="llameradas\collavic.html">LA GRAN CONFRATERNIDAD LLAMERADA VIRGEN DE LA CANDELARIA CENTRAL PUNO - LA GRAN COLLAVIC - PUNO</a></td></tr>
+            <tr><td class="hidden">4</td><td class="hidden">192</td><td class="hidden">92</td><td class="hidden">MORENADA</td><td>4</td><td></td><td>92</td><td><a href="morenadas\san-martin.html">MORENADA SAN MARTIN</a></td></tr>
+            <tr><td class="hidden">5</td><td class="hidden">189</td><td class="hidden">89</td><td class="hidden">TOBAS</td><td>5</td><td></td><td>89</td><td><a href="tobas\t-central.html">ASOCIACION FOLKLORICA ANDINO AMAZONICO TOBAS CENTRAL PERU</a></td></tr>
+            <tr><td class="hidden">6</td><td class="hidden">195</td><td class="hidden">95</td><td class="hidden">CAPORALES</td><td>6</td><td></td><td>95</td><td><a href="caporales\romeos.html">ASOCIACION ROMEOS DE CANDELARIA</a></td></tr>
+            <tr><td class="hidden">7</td><td class="hidden">194</td><td class="hidden">94</td><td class="hidden">CAPORALES</td><td>7</td><td></td><td>94</td><td><a href="caporales\tuntuna-uni.html">CONJUNTO DE DANZAS ALTIPLANICAS DE LA UNI (TUNTUNA UNI)</a></td></tr>
+            <tr><td class="hidden">8</td><td class="hidden">193</td><td class="hidden">93</td><td class="hidden">DIABLADA</td><td>8</td><td></td><td>93</td><td><a href="diabladas\pnp.html">ASOCIACION CULTURAL INCOMPARABLE GRAN DIABLADA AMIGOS DE LA PNP</a></td></tr>
+            <tr><td class="hidden">9</td><td class="hidden">187</td><td class="hidden">87</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>9</td><td></td><td>87</td><td><a href="sikuris-vb\immaculada-lampa.html">CENTRO CULTURAL SENTIMIENTO SIKURIS LAS VICUNAS DE LA INMACULADA - LAMPA</a></td></tr>
+            <tr><td class="hidden">10</td><td class="hidden">191</td><td class="hidden">91</td><td class="hidden">MORENADA</td><td>10</td><td></td><td>91</td><td><a href="morenadas\salcedo.html">GRAN MORENADA SALCEDO</a></td></tr>
+            <tr><td class="hidden">11</td><td class="hidden">186</td><td class="hidden">86</td><td class="hidden">TOBAS</td><td>11</td><td></td><td>86</td><td><a href="tobas\t-sur.html">CONFRATERNIDAD CENTRAL TOBAS SUR</a></td></tr>
+            <tr><td class="hidden">12</td><td class="hidden">190</td><td class="hidden">90</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>12</td><td></td><td>90</td><td><a href="sikuris-vb\27-jun-ajp.html">ASOCIACION JUVENIL PUNO SICURIS 27 DE JUNIO (AJP)</a></td></tr>
+            <tr><td class="hidden">13</td><td class="hidden">196</td><td class="hidden">96</td><td class="hidden">MORENADA</td><td>13</td><td></td><td>96</td><td><a href="morenadas\m-san-valentin.html">CONFRATERNIDAD PODEROSA Y ESPECTACULAR MORENADA SAN VALENTIN - ILAVE</a></td></tr>
+            <tr><td class="hidden">14</td><td class="hidden">1</td><td class="hidden">101</td><td class="hidden">SIKURIS UN SOLO BOMBO</td><td>14</td><td>1</td><td></td><td><a href="sikuris-ub\zamponas-uni.html">CONJUNTO DE ZAMPOÑAS Y DANZAS UNI</a></td></tr>
+            <tr><td class="hidden">15</td><td class="hidden">158</td><td class="hidden">58</td><td class="hidden">OTROS</td><td>15</td><td></td><td>58</td><td><a href="otros\manco-capac-1.html">CONJUNTO CLASIFICADO SALIDA DE MANCO CAPAC Y MAMA OCLLO 2025</a></td></tr>
+            <tr><td class="hidden">16</td><td class="hidden">43</td><td class="hidden">143</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>16</td><td>43</td><td></td><td><a href="sikuris-vb\www-huatasani.html">SOCIEDAD DE EXPRESION CULTURAL SIKURIS WARA WARA WAYRAS HUATASANI - HUANCANE</a></td></tr>
+            <tr><td class="hidden">17</td><td class="hidden">19</td><td class="hidden">119</td><td class="hidden">CAPORALES</td><td>17</td><td>19</td><td></td><td><a href="caporales\tundiques.html">ESCUELA DE ARTE "JOSE CARLOS MARIATEGUI" ZAMBOS TUNDIQUES</a></td></tr>
+            <tr><td class="hidden">18</td><td class="hidden">155</td><td class="hidden">55</td><td class="hidden">DIABLADA</td><td>18</td><td></td><td>55</td><td><a href="diabladas\san-antonio.html">CONFRATERNIDAD DIABLADA SAN ANTONIO</a></td></tr>
+            <tr><td class="hidden">19</td><td class="hidden">168</td><td class="hidden">68</td><td class="hidden">SIKURIS UN SOLO BOMBO</td><td>19</td><td></td><td>68</td><td><a href="sikuris-ub\29-sep-ilave.html">ASOCIACION DE EXPRESION CULTURAL JUVENIL 29 DE SEPTIEMBRE - ILAVE</a></td></tr>
+            <tr><td class="hidden">20</td><td class="hidden">47</td><td class="hidden">147</td><td class="hidden">MORENADA</td><td>20</td><td>47</td><td></td><td><a href="morenadas\orkapata.html">CONJUNTO FOLKLORICO MORENADA ORKAPATA</a></td></tr>
+            <tr><td class="hidden">21</td><td class="hidden">181</td><td class="hidden">81</td><td class="hidden">CAPORALES</td><td>21</td><td></td><td>81</td><td><a href="caporales\centro-cultural.html">CAPORALES CENTRO CULTURAL ANDINO</a></td></tr>
+            <tr><td class="hidden">22</td><td class="hidden">180</td><td class="hidden">80</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>22</td><td></td><td>80</td><td><a href="sikuris-vb\winay-q-ururi.html">CONJUNTO DE MUSICOS Y DANZAS AUTOCTONAS "WIÑAY QHANTATI" URURI CONIMA</a></td></tr>
+            <tr><td class="hidden">23</td><td class="hidden">165</td><td class="hidden">65</td><td class="hidden">MORENADA</td><td>23</td><td></td><td>65</td><td><a href="morenadas\huajsapata.html">MORENADA HUAJSAPATA</a></td></tr>
+            <tr><td class="hidden">24</td><td class="hidden">39</td><td class="hidden">139</td><td class="hidden">LLAMERADA</td><td>24</td><td>39</td><td></td><td><a href="llameradas\juvenil-andino.html">CONJUNTO FOLKLORICO LA LLAMERADA DEL CLUB JUVENIL ANDINO DE LAMPA</a></td></tr>
+            <tr><td class="hidden">25</td><td class="hidden">3</td><td class="hidden">103</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>25</td><td>3</td><td></td><td><a href="sikuris-vb\asikur-ilave.html">AGRUPACION DE SIKURIS RAICES AYMARAS - ILAVE "ASIKUR"</a></td></tr>
+            <tr><td class="hidden">26</td><td class="hidden">48</td><td class="hidden">148</td><td class="hidden">DIABLADA</td><td>26</td><td>48</td><td></td><td><a href="diabladas\d-azoguini.html">ASOCIACION FOLKLORICA DIABLADA AZOGUINI</a></td></tr>
+            <tr><td class="hidden">27</td><td class="hidden">182</td><td class="hidden">82</td><td class="hidden">MORENADA</td><td>27</td><td></td><td>82</td><td><a href="morenadas\m-santa-rosa.html">CONFRATERNIDAD MORENADA SANTA ROSA - PUNO</a></td></tr>
+            <tr><td class="hidden">28</td><td class="hidden">9</td><td class="hidden">109</td><td class="hidden">CAPORALES</td><td>28</td><td>9</td><td></td><td><a href="caporales\c-san-valentin.html">ASOCIACION FOLKLORICA CAPORALES SAN VALENTIN</a></td></tr>
+            <tr><td class="hidden">29</td><td class="hidden">23</td><td class="hidden">123</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>29</td><td>23</td><td></td><td><a href="sikuris-vb\14-sep-moho.html">GRUPO DE ARTE 14 DE SEPTIEMBRE - MOHO</a></td></tr>
+            <tr><td class="hidden">30</td><td class="hidden">177</td><td class="hidden">77</td><td class="hidden">SIKURIS UN SOLO BOMBO</td><td>30</td><td></td><td>77</td><td><a href="sikuris-ub\juventud-obrera.html">CONJUNTO DE ARTE Y FOLKLORE SICURIS JUVENTUD OBRERA</a></td></tr>
+            <tr><td class="hidden">31</td><td class="hidden">37</td><td class="hidden">137</td><td class="hidden">MORENADA</td><td>31</td><td>37</td><td></td><td><a href="morenadas\galeno.html">MORENADA CENTRAL GALENO - DR. RICARDO J. RUELAS RODRIGUEZ</a></td></tr>
+            <tr><td class="hidden">32</td><td class="hidden">154</td><td class="hidden">54</td><td class="hidden">CAPORALES</td><td>32</td><td></td><td>54</td><td><a href="caporales\sambos-porteno.html">ASOCIACION FOLKLORICA CAPORALES "SAMBOS CON SENTIMIENTO Y DEVOCION PORTEÑO"</a></td></tr>
+            <tr><td class="hidden">33</td><td class="hidden">151</td><td class="hidden">51</td><td class="hidden">MORENADA</td><td>33</td><td></td><td>51</td><td><a href="morenadas\rm-laykakota.html">REY MORENO LAYKAKOTA</a></td></tr>
+            <tr><td class="hidden">34</td><td class="hidden">149</td><td class="hidden">49</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>34</td><td></td><td>49</td><td><a href="sikuris-vb\indomable-azangaro.html">ASOCIACION CULTURAL SANGRE INDOMABLE - AZANGARO</a></td></tr>
+            <tr><td class="hidden">35</td><td class="hidden">178</td><td class="hidden">78</td><td class="hidden">WACA WACA</td><td>35</td><td></td><td>78</td><td><a href="waca-wacas\alto-puno.html">PODEROSA ESPECTACULAR WACA WACA ALTO PUNO</a></td></tr>
+            <tr><td class="hidden">36</td><td class="hidden">156</td><td class="hidden">56</td><td class="hidden">OTROS</td><td>36</td><td></td><td>56</td><td><a href="otros\huanuco.html">COFRADIA DE NEGRITOS CHACON BEATERIO DE HUANUCO</a></td></tr>
+            <tr><td class="hidden">37</td><td class="hidden">6</td><td class="hidden">106</td><td class="hidden">MORENADA</td><td>37</td><td>6</td><td></td><td><a href="morenadas\mandachitos.html">MORENADA VIRGEN DE LA CANDELARIA - MANDACHITOS</a></td></tr>
+            <tr><td class="hidden">38</td><td class="hidden">18</td><td class="hidden">118</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>38</td><td>18</td><td></td><td><a href="sikuris-vb\rosales-rosaspata.html">EXPRESION CULTURAL MILENARIOS DE SIKURIS INTERNACIONAL LOS ROSALES ROSASPATA - HUANCANE</a></td></tr>
+            <tr><td class="hidden">39</td><td class="hidden">166</td><td class="hidden">66</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>39</td><td></td><td>66</td><td><a href="sikuris-vb\13-may-huayrapata.html">ASOCIACION LA VOZ CULTURAL KHANTUS 13 DE MAYO - DISTRITO HUAYRAPATA</a></td></tr>
+            <tr><td class="hidden">40</td><td class="hidden">40</td><td class="hidden">140</td><td class="hidden">CAPORALES</td><td>40</td><td>40</td><td></td><td><a href="caporales\c-sur.html">ESCUELA INTERNACIONAL DEL FOLKLORE CAPORALES DEL SUR PUNO</a></td></tr>
+            <tr><td class="hidden">41</td><td class="hidden">164</td><td class="hidden">64</td><td class="hidden">KULLAWADA</td><td>41</td><td></td><td>64</td><td><a href="kullawadas\candelaria.html">ASOCIACION CULTURAL KULLAHUADA VIRGEN MARIA DE LA CANDELARIA</a></td></tr>
+            <tr><td class="hidden">42</td><td class="hidden">10</td><td class="hidden">110</td><td class="hidden">WACA WACA</td><td>42</td><td>10</td><td></td><td><a href="waca-wacas\w-porteno.html">WACA WACA DEL BARRIO PORTEÑO</a></td></tr>
+            <tr><td class="hidden">43</td><td class="hidden">176</td><td class="hidden">76</td><td class="hidden">CAPORALES</td><td>43</td><td></td><td>76</td><td><a href="caporales\c-victoria.html">ASOCIACION FOLKLORICA "CAPORALES VICTORIA" - PUNO</a></td></tr>
+            <tr><td class="hidden">44</td><td class="hidden">183</td><td class="hidden">83</td><td class="hidden">SIKURIS UN SOLO BOMBO</td><td>44</td><td></td><td>83</td><td><a href="sikuris-ub\sf-borja-yunguyo.html">ASOCIACION DE ZAMPONISTAS Y DANZAS AUTOCTONAS SAN FRANCISCO DE BORJA - YUNGUYO</a></td></tr>
+            <tr><td class="hidden">45</td><td class="hidden">45</td><td class="hidden">145</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>45</td><td>45</td><td></td><td><a href="sikuris-vb\huarihuma-rosaspata.html">AGRUPACION CULTURAL MILENARIA DE SIKURIS INTERNACIONAL HUARIHUMA ROSASPATA - HUANCANE</a></td></tr>
+            <tr><td class="hidden">46</td><td class="hidden">2</td><td class="hidden">102</td><td class="hidden">OTROS</td><td>46</td><td>2</td><td></td><td><a href="otros\manco-capac-2.html">CONJUNTO CLASIFICADO SALIDA DE MANCO CAPAC Y MAMA OCLLO 2025</a></td></tr>
+            <tr><td class="hidden">47</td><td class="hidden">170</td><td class="hidden">70</td><td class="hidden">DIABLADA</td><td>47</td><td></td><td>70</td><td><a href="diabladas\d-porteno.html">TRADICIONAL DIABLADA PORTEÑO</a></td></tr>
+            <tr><td class="hidden">48</td><td class="hidden">16</td><td class="hidden">116</td><td class="hidden">MORENADA</td><td>48</td><td>16</td><td></td><td><a href="morenadas\rm-san-antonio.html">TRADICIONAL REY MORENO SAN ANTONIO</a></td></tr>
+            <tr><td class="hidden">48.1</td><td class="hidden">24.1</td><td class="hidden">124.1</td><td class="hidden">OTROS</td><td>-</td><td>-</td><td></td><td><a href="otros\wifalas-2025.html">WIFALAS SAN FRANCISCO JAVIER DE MUÑANI (Campeon en Danzas Originarios 2025)</a></td></tr>
+            <tr><td class="hidden">49</td><td class="hidden">157</td><td class="hidden">57</td><td class="hidden">WACA WACA</td><td>49</td><td></td><td>57</td><td><a href="waca-wacas\wacas.html">CONFRATERNIDAD CULTURAL WACAS PUNO</a></td></tr>
+            <tr><td class="hidden">50</td><td class="hidden">42</td><td class="hidden">142</td><td class="hidden">MORENADA</td><td>50</td><td>42</td><td></td><td><a href="morenadas\m-porteno.html">ASOCIACION MORENADA PORTEÑO</a></td></tr>
+            <tr><td class="hidden">51</td><td class="hidden">159</td><td class="hidden">59</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>51</td><td></td><td>59</td><td><a href="sikuris-vb\wila-marca.html">AGRUPACION SOCIEDAD CULTURAL AUTOCTONO SIKURIS WILA MARCA DE CONIMA</a></td></tr>
+            <tr><td class="hidden">52</td><td class="hidden">173</td><td class="hidden">73</td><td class="hidden">TINKUS</td><td>52</td><td></td><td>73</td><td><a href="tinkus\machallata.html">ASOCIACION FOLKLORICA TINKUS SEÑOR DE MACHALLATA</a></td></tr>
+            <tr><td class="hidden">53</td><td class="hidden">5</td><td class="hidden">105</td><td class="hidden">SIKURIS UN SOLO BOMBO</td><td>53</td><td>5</td><td></td><td><a href="sikuris-ub\lacustre-jae.html">ASOCIACION CULTURAL ZAMPONISTAS LACUSTRE DEL BARRIO JOSE ANTONIO ENCINAS</a></td></tr>
+            <tr><td class="hidden">54</td><td class="hidden">167</td><td class="hidden">67</td><td class="hidden">CAPORALES</td><td>54</td><td></td><td>67</td><td><a href="caporales\centralistas.html">ASOCIACION CULTURAL CAPORALES CENTRALISTAS PUNO</a></td></tr>
+            <tr><td class="hidden">55</td><td class="hidden">26</td><td class="hidden">126</td><td class="hidden">AYARACHIS</td><td>55</td><td>26</td><td></td><td><a href="ayarachis\cuyo-cuyo.html">AUTENTICOS AYARACHIS TAWANTIN AYLLU CUYO CUYO - SANDIA</a></td></tr>
+            <tr><td class="hidden">56</td><td class="hidden">36</td><td class="hidden">136</td><td class="hidden">DIABLADA</td><td>56</td><td>36</td><td></td><td><a href="diabladas\d-bellavista.html">ASOCIACION FOLCLORICA ESPECTACULAR DIABLADA BELLAVISTA</a></td></tr>
+            <tr><td class="hidden">57</td><td class="hidden">171</td><td class="hidden">71</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>57</td><td></td><td>71</td><td><a href="sikuris-vb\pokopaka-huancane.html">SOCIEDAD CENTRO SOCIAL DE FOLKLORE Y CULTURA: SIKURIS Y DANZAS AUTOCTONAS "FUNDACION POKOPAKA" DE HUANCANE</a></td></tr>
+            <tr><td class="hidden">58</td><td class="hidden">17</td><td class="hidden">117</td><td class="hidden">KULLAWADA</td><td>58</td><td>17</td><td></td><td><a href="kullawadas\k-victoria.html">AGRUPACION KULLAHUADA VICTORIA</a></td></tr>
+            <tr><td class="hidden">59</td><td class="hidden">153</td><td class="hidden">53</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>59</td><td></td><td>53</td><td><a href="sikuris-vb\intercontinentales-huancane.html">ASOCIACION CULTURAL DE SIKURIS INTERCONTINENTALES AYMARAS DE HUANCANE</a></td></tr>
+            <tr><td class="hidden">60</td><td class="hidden">152</td><td class="hidden">52</td><td class="hidden">TOBAS</td><td>60</td><td></td><td>52</td><td><a href="tobas\biodanza.html">ASOCIACION CULTURAL ECOLOGISTA ETNIAS AMAZONICAS DEL PERU - BIODANZA</a></td></tr>
+            <tr><td class="hidden">61</td><td class="hidden">35</td><td class="hidden">135</td><td class="hidden">CAPORALES</td><td>61</td><td>35</td><td></td><td><a href="caporales\pitones.html">ASOCIACION DE ARTE, CULTURA Y FOLKLORE CAPORALES DE SIEMPRE - PITONES</a></td></tr>
+            <tr><td class="hidden">62</td><td class="hidden">179</td><td class="hidden">79</td><td class="hidden">MORENADA</td><td>62</td><td></td><td>79</td><td><a href="morenadas\juliaca-mia.html">CONFRATERNIDAD MORENADA INTOCABLES JULIACA MIA</a></td></tr>
+            <tr><td class="hidden">63</td><td class="hidden">8</td><td class="hidden">108</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>63</td><td>8</td><td></td><td><a href="sikuris-vb\aymaras-huancane.html">ASOCIACION CULTURAL DE SIKURIS LOS AYMARAS DE HUANCANE</a></td></tr>
+            <tr><td class="hidden">64</td><td class="hidden">15</td><td class="hidden">115</td><td class="hidden">SIKURIS UN SOLO BOMBO</td><td>64</td><td>15</td><td></td><td><a href="sikuris-ub\ocona-ilave.html">CONJUNTO DE ZAMPOÑAS "EXPRESION CULTURAL" DEL CENTRO POBLADO DE OCOÑA - ILAVE</a></td></tr>
+            <tr><td class="hidden">65</td><td class="hidden">174</td><td class="hidden">74</td><td class="hidden">MORENADA</td><td>65</td><td></td><td>74</td><td><a href="morenadas\rc-independencia.html">CONJUNTO "REY CAPORAL INDEPENDENCIA" - PUNO</a></td></tr>
+            <tr><td class="hidden">66</td><td class="hidden">38</td><td class="hidden">138</td><td class="hidden">WACA WACA</td><td>66</td><td>38</td><td></td><td><a href="waca-wacas\w-santa-rosa.html">ASOCIACION FOLKLORICA WACA WACA SANTA ROSA</a></td></tr>
+            <tr><td class="hidden">67</td><td class="hidden">160</td><td class="hidden">60</td><td class="hidden">CAPORALES</td><td>67</td><td></td><td>60</td><td><a href="caporales\c-huascar.html">ASOCIACION CULTURAL FOLKLORICA CAPORALES HUASCAR</a></td></tr>
+            <tr><td class="hidden">68</td><td class="hidden">27</td><td class="hidden">127</td><td class="hidden">MORENADA</td><td>68</td><td>27</td><td></td><td><a href="morenadas\laykakota.html">MORENADA LAYKAKOTA</a></td></tr>
+            <tr><td class="hidden">69</td><td class="hidden">14</td><td class="hidden">114</td><td class="hidden">CAPORALES</td><td>69</td><td>14</td><td></td><td><a href="caporales\catumi.html">CONJUNTO FOLKLORICO LOS CAPORALES DELA TUNTUNA DEL BARRIO MIRAFLORES CATUMI - PUNO</a></td></tr>
+            <tr><td class="hidden">70</td><td class="hidden">22</td><td class="hidden">122</td><td class="hidden">OTROS</td><td>70</td><td>22</td><td></td><td><a href="otros\chumbivilcas.html">AGRUPACION SANGRE CHUMBIVILCANA - DANZA HUAYLIA CHUMBIVILCANA - CUSCO</a></td></tr>
+            <tr><td class="hidden">71</td><td class="hidden">31</td><td class="hidden">131</td><td class="hidden">CAPORALES</td><td>71</td><td>31</td><td></td><td><a href="caporales\qoillor-ritty.html">FRATERNIDAD ARTISTICA SAMBOS CAPORALES SEÑOR DE QOILLOR - RITTY</a></td></tr>
+            <tr><td class="hidden">72</td><td class="hidden">34</td><td class="hidden">134</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>72</td><td>34</td><td></td><td><a href="sikuris-vb\15-may-cambria.html">CONJUNTO SIKURIS 15 DE MAYO DE CAMBRIA - CONIMA</a></td></tr>
+            <tr><td class="hidden">73</td><td class="hidden">21</td><td class="hidden">121</td><td class="hidden">DIABLADA</td><td>73</td><td>21</td><td></td><td><a href="diabladas\d-victoria.html">DIABLADA CONFRATERNIDAD VICTORIA</a></td></tr>
+            <tr><td class="hidden">74</td><td class="hidden">25</td><td class="hidden">125</td><td class="hidden">SIKURIS UN SOLO BOMBO</td><td>74</td><td>25</td><td></td><td><a href="sikuris-ub\altiplano-huajsapata.html">AGRUPACION DE ZAMPOÑISTAS DEL ALTIPLANO DEL BARRIO HUAJSAPATA - PUNO</a></td></tr>
+            <tr><td class="hidden">75</td><td class="hidden">24</td><td class="hidden">124</td><td class="hidden">CAPORALES</td><td>75</td><td>24</td><td></td><td><a href="caporales\legado.html">ASOCIACION CULTURAL FOLKLORICA "LEGADO CAPORAL"</a></td></tr>
+            <tr><td class="hidden">76</td><td class="hidden">172</td><td class="hidden">72</td><td class="hidden">AYARACHIS</td><td>76</td><td></td><td>72</td><td><a href="ayarachis\antalla-palca.html">AUTENTICOS AYARACHIS DE ANTALLA PALCA - LAMPA</a></td></tr>
+            <tr><td class="hidden">77</td><td class="hidden">32</td><td class="hidden">132</td><td class="hidden">TOBAS</td><td>77</td><td>32</td><td></td><td><a href="tobas\anata.html">ASOCIACION CULTURAL FOLKLORICA TOBAS AMAZONAS ANATA</a></td></tr>
+            <tr><td class="hidden">78</td><td class="hidden">12</td><td class="hidden">112</td><td class="hidden">MORENADA</td><td>78</td><td>12</td><td></td><td><a href="morenadas\m-azoguini.html">ASOCIACION CULTURAL "MORENADA AZOGUINI"</a></td></tr>
+            <tr><td class="hidden">79</td><td class="hidden">28</td><td class="hidden">128</td><td class="hidden">KULLAWADA</td><td>79</td><td>28</td><td></td><td><a href="kullawadas\k-central.html">CENTRO SOCIAL KULLAWADA CENTRAL PUNO</a></td></tr>
+            <tr><td class="hidden">80</td><td class="hidden">163</td><td class="hidden">63</td><td class="hidden">CAPORALES</td><td>80</td><td></td><td>63</td><td><a href="caporales\san-juan.html">ASOCIACION DE ARTE Y FOLCLORE CAPORALES SAN JUAN BAUTISTA - PUNO</a></td></tr>
+            <tr><td class="hidden">81</td><td class="hidden">30</td><td class="hidden">130</td><td class="hidden">OTROS</td><td>81</td><td>30</td><td></td><td><a href="otros\manco-capac-3.html">CONJUNTO CLASIFICADO SALIDA DE MANCO CAPAC Y MAMA OCLLO 2025</a></td></tr>
+            <tr><td class="hidden">82</td><td class="hidden">41</td><td class="hidden">141</td><td class="hidden">SIKURIS UN SOLO BOMBO</td><td>82</td><td>41</td><td></td><td><a href="sikuris-ub\manazo.html">CENTENARIO CONJUNTO SICURIS DEL BARRIO MAÑAZO</a></td></tr>
+            <tr><td class="hidden">83</td><td class="hidden">29</td><td class="hidden">129</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>83</td><td>29</td><td></td><td><a href="sikuris-vb\claveles-rojos.html">AGRUPACION CULTURAL SICURIS "CLAVELES ROJOS" DE HUANCANE</a></td></tr>
+            <tr><td class="hidden">84</td><td class="hidden">4</td><td class="hidden">104</td><td class="hidden">CAPORALES</td><td>84</td><td>4</td><td></td><td><a href="caporales\vientos-sur.html">FRATERNIDAD CAPORALES VIRGEN DE LA CANDELARIA "VIENTOS DEL SUR"</a></td></tr>
+            <tr><td class="hidden">85</td><td class="hidden">162</td><td class="hidden">62</td><td class="hidden">MORENADA</td><td>85</td><td></td><td>62</td><td><a href="morenadas\m-bellavista.html">PODEROSA Y ESPECTACULAR MORENADA BELLAVISTA</a></td></tr>
+            <tr><td class="hidden">86</td><td class="hidden">184</td><td class="hidden">84</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>86</td><td></td><td>84</td><td><a href="sikuris-vb\pariwanas-huancane.html">ASOCIACION CULTURAL DE SICURIS PROYECTO PARIWANAS DE HUANCANE</a></td></tr>
+            <tr><td class="hidden">87</td><td class="hidden">169</td><td class="hidden">69</td><td class="hidden">AYARACHIS</td><td>87</td><td></td><td>69</td><td><a href="ayarachis\paratia.html">ASOCIACION CULTURAL GENUINOS AYARACHIS DE PARATIA - LAMPA</a></td></tr>
+            <tr><td class="hidden">88</td><td class="hidden">150</td><td class="hidden">50</td><td class="hidden">SIKURIS UN SOLO BOMBO</td><td>88</td><td></td><td>50</td><td><a href="sikuris-ub\jupax.html">CONJUNTO DE ZAMPONISTAS JUVENTUD PAXA "JUPAX"</a></td></tr>
+            <tr><td class="hidden">89</td><td class="hidden">33</td><td class="hidden">133</td><td class="hidden">MORENADA</td><td>89</td><td>33</td><td></td><td><a href="morenadas\ricardo-palma.html">CONJUNTO MORENADA "RICARDO PALMA"</a></td></tr>
+            <tr><td class="hidden">90</td><td class="hidden">175</td><td class="hidden">75</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>90</td><td></td><td>75</td><td><a href="sikuris-vb\ajc-cabanillas.html">ASOCIACION JUVENIL CABANILLAS SIKURIS AJC</a></td></tr>
+            <tr><td class="hidden">91</td><td class="hidden">7</td><td class="hidden">107</td><td class="hidden">DIABLADA</td><td>91</td><td>7</td><td></td><td><a href="diabladas\centinelas.html">ASOCIACION FOLKLORICA DIABLADA "CENTINELAS DEL ALTIPLANO"</a></td></tr>
+            <tr><td class="hidden">92</td><td class="hidden">46</td><td class="hidden">146</td><td class="hidden">CAPORALES</td><td>92</td><td>46</td><td></td><td><a href="caporales\afovic.html">ASOCIACION FOLKLORICA VIRGEN DE LA CANDELARIA - AFOVIC</a></td></tr>
+            <tr><td class="hidden">93</td><td class="hidden">20</td><td class="hidden">120</td><td class="hidden">MORENADA</td><td>93</td><td>20</td><td></td><td><a href="morenadas\independencia.html">FABULOSA MORENADA INDEPENDENCIA</a></td></tr>
+            <tr><td class="hidden">94</td><td class="hidden">161</td><td class="hidden">61</td><td class="hidden">SIKURIS UN SOLO BOMBO</td><td>94</td><td></td><td>61</td><td><a href="sikuris-ub\r-asuncion-juli.html">TALLER DE ARTE, MUSICA Y DANZA "REAL ASUNCION" - JULI</a></td></tr>
+            <tr><td class="hidden">95</td><td class="hidden">11</td><td class="hidden">111</td><td class="hidden">TINKUS</td><td>95</td><td>11</td><td></td><td><a href="tinkus\t-porteno.html">JUVENTUD TINKUS DEL BARRIO PORTEÑO</a></td></tr>
+            <tr><td class="hidden">96</td><td class="hidden">13</td><td class="hidden">113</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>96</td><td>13</td><td></td><td><a href="sikuris-vb\qhantati-ururi.html">CONJUNTO DE DANZAS Y MUSICA AUTOCTONA QHANTATI URURI DE CONIMA</a></td></tr>
+            <tr><td class="hidden">97</td><td class="hidden">44</td><td class="hidden">144</td><td class="hidden">SIKURIS VARIOS BOMBOS</td><td>97</td><td>44</td><td></td><td><a href="sikuris-vb\unmsm-iczsmi.html">CENTRO UNIVERSITARIO DE FOLKLORE Y EL CONJUNTO DE ZAMPONAS DE LA UNIVERSIDAD NACIONAL MAYOR DE SAN MARCOS ICZSMI</a></td></tr>
+            <tr><td class="hidden">97.1</td><td class="hidden">48.1</td><td class="hidden">148.1</td><td class="hidden">CAPORALES</td><td>-</td><td>-</td><td></td><td><a href="caporales\viejo-sj.html">ASOCIACION CULTURAL CAPORALES MI VIEJO SJ</a></td></tr>
+            <tr><td class="hidden">97.2</td><td class="hidden">197.1</td><td class="hidden">97.1</td><td class="hidden">MORENADA</td><td>-</td><td></td><td>-</td><td><a href="morenadas\m-central.html">MORENADA CENTRAL PUNO</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie -->
+  <footer>
+    <p>#CANDELARIA2026</p>
+    <p>bailaencandelaria@gmail.com</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+
+  <script>
+    const buttons = document.querySelectorAll(".buttons button");
+    const buscador = document.getElementById("buscador");
+    const table = document.getElementById("GeneralOrdenTable");
+
+    function sortTable(colIndex, btn, alpha = false) {
+      buttons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const table = document.getElementById("GeneralOrdenTable");
+      const rows = Array.from(table.rows).slice(1);
+      rows.sort((a, b) => {
+        let valA = a.cells[colIndex].innerText.trim();
+        let valB = b.cells[colIndex].innerText.trim();
+        if (alpha) return valA.localeCompare(valB);
+        valA = parseFloat(valA) || 9999;
+        valB = parseFloat(valB) || 9999;
+        return valA - valB;
+      });
+      rows.forEach(r => table.tBodies[0].appendChild(r));
+    }
+    
+    buscador.addEventListener("input", () => {
+      const filtro = buscador.value.toLowerCase();
+      Array.from(table.tBodies[0].rows).forEach(row => {
+        const nombre = row.cells[7].innerText.toLowerCase();
+        row.style.display = nombre.includes(filtro) ? "" : "none";
+      });
+    });
+
+    window.onload = () => sortTable(0, document.getElementById("domingo"));
+  </script>
+
+</body>
+</html>

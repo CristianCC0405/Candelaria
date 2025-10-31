@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Orden - #CANDELARIA2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+    <style>
+    /* === ESTILOS EXCLUSIVOS DE LA TABLA === */
+    #order {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 20px auto;
+      width: 60%;
+      max-width: 900px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .buttons button {
+      background-color: white;
+      color: #7f6000;
+      border: 2px solid #7f6000;
+      padding: 8px 0;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 'Lato', sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 6px;
+      transition: all 0.2s;
+      width: 100px; /* 👈 ancho fijo para los tres botones */
+      text-align: center;
+    }
+    .buttons button.active {
+      background-color: #7f6000;
+      color: white;
+    }
+
+    #searchBox{
+      border: 2px solid #7f6000;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 14px;
+      font-family: 'Lato', sans-serif;
+      outline: none;
+      margin-left: auto;
+      flex: 1;
+      max-width: 250px;
+    }
+
+    button {
+      background-color: white;
+      color: #7f6000;
+      border: 2px solid #7f6000;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 'Lato', sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    button.active {
+      background-color: #7f6000;
+      color: white;
+    }
+    
+    #buscador {
+      border: 2px solid #7f6000;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 14px;
+      font-family: 'Lato', sans-serif;
+      outline: none;
+      flex: 1;
+      width: 250px;
+      max-width: 250px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    table {
+      width: 60%;
+      max-width: 900px;
+      border-collapse: collapse;
+      font-size: 14px;
+      font-weight: lighter;
+      margin: 0 auto 40px auto;
+      border: 2px solid #7f6000;
+
+    }
+    th, td {
+      border-bottom: 1px solid #7f6000;
+      text-align: center;
+      padding: 10px;
+      border-right: 1px solid #7f6000;
+    }
+
+    th:nth-child(5),
+    th:nth-child(6),
+    th:nth-child(7),
+    td:nth-child(5),
+    td:nth-child(6),
+    td:nth-child(7) {
+      width: 70px; /* 👈 ancho fijo para DOM, LUN, MAR */
+    }
+
+    th:last-child, td:last-child { border-right: none; }
+    tr:last-child td { border-bottom: 2px solid #7f6000; }
+    
+    th {
+      background-color: #7f6000;
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) { background: #f9f9f9; }
+    tr:hover { background: #fff2cc; transition: background 0.2s ease; }
+
+    /* Columna "CONJUNTO" alineada a la izquierda */
+    td:last-child {
+      text-align: left;
+      padding-left: 12px;
+    }
+
+    td a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    td a:hover {
+      color: #7f6000;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .controls {
+        width: 90%;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .buttons {
+        justify-content: center;
+        width: 100%;
+      }
+      .buttons button{
+        width: 90px;
+      }
+      #buscador {
+        width: 287px;
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+      }
+      table {
+        width: 90%;
+        font-size: 14px;
+      }
+      /* 🔹 Reducir ancho de columnas DOM/LUN/MAR solo en celular */
+      th:nth-child(5),
+      th:nth-child(6),
+      th:nth-child(7),
+      td:nth-child(5),
+      td:nth-child(6),
+      td:nth-child(7) {
+        width: 45px; /* 👈 antes eran 70px, ahora más angostas */
+        padding: 6px;
+      }
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <!-- Encabezado (reutilizado del index) -->
+  <header>
+    <a href="index.html" class="logo">
+      <img src="img/logo.png" alt="logo">
+      <span>#CANDELARIA2026</span>
+    </a>
+
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="danzas.html">Danzas</a>
+      <a href="orden.html">Orden</a>
+      <a href="https://www.tiktok.com/@bailaencandelaria" target="_blank" rel="noreferrer">
+        <img src="img/tiktok.png" alt="TikTok" class="tiktok-icon">
+      </a>
+    </nav>
+  </header>
+
+  <!-- Contenido principal -->
+  <main>
+    <section id="caporales">
+      <h1>CAPORALES</h1>
+      <p>¡ORDENA SEGÚN TU PREFERENCIA!</p>
+
+      <div class="controls">
+        <div class="buttons">
+          <button id="domingo" class="active" onclick="sortTable(0, this)">Domingo</button>
+          <button id="lunes" onclick="sortTable(1, this)">Lunes</button>
+          <button id="martes" onclick="sortTable(2, this)">Martes</button>
+        </div>
+        <input type="text" id="buscador" placeholder="Buscar conjunto ...">
+      </div>
+       <div class="table-container">
+        <table id="caporalesTable">
+          <thead>
+            <tr>
+              <th class="hidden">Orden Real 08</th>
+              <th class="hidden">Orden Real 09</th>
+              <th class="hidden">Orden Real 10</th>
+              <th class="hidden">Categoría</th>
+              <th>DOM</th>
+              <th>LUN</th>
+              <th>MAR</th>
+              <th>CONJUNTO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="hidden">6</td><td class="hidden">195</td><td class="hidden">95</td><td class="hidden">CAPORALES</td><td>6</td><td></td><td>95</td><td><a href="caporales\romeos.html">ASOCIACION ROMEOS DE CANDELARIA</a></td></tr>
+            <tr><td class="hidden">7</td><td class="hidden">194</td><td class="hidden">94</td><td class="hidden">CAPORALES</td><td>7</td><td></td><td>94</td><td><a href="caporales\tuntuna-uni.html">CONJUNTO DE DANZAS ALTIPLANICAS DE LA UNI (TUNTUNA UNI)</a></td></tr>
+            <tr><td class="hidden">17</td><td class="hidden">19</td><td class="hidden">119</td><td class="hidden">CAPORALES</td><td>17</td><td>19</td><td></td><td><a href="caporales\tundiques.html">ESCUELA DE ARTE "JOSE CARLOS MARIATEGUI" ZAMBOS TUNDIQUES</a></td></tr>
+            <tr><td class="hidden">21</td><td class="hidden">181</td><td class="hidden">81</td><td class="hidden">CAPORALES</td><td>21</td><td></td><td>81</td><td><a href="caporales\centro-cultural.html">CAPORALES CENTRO CULTURAL ANDINO</a></td></tr>
+            <tr><td class="hidden">28</td><td class="hidden">9</td><td class="hidden">109</td><td class="hidden">CAPORALES</td><td>28</td><td>9</td><td></td><td><a href="caporales\c-san-valentin.html">ASOCIACION FOLKLORICA CAPORALES SAN VALENTIN</a></td></tr>
+            <tr><td class="hidden">32</td><td class="hidden">154</td><td class="hidden">54</td><td class="hidden">CAPORALES</td><td>32</td><td></td><td>54</td><td><a href="caporales\sambos-porteno.html">ASOCIACION FOLKLORICA CAPORALES "SAMBOS CON SENTIMIENTO Y DEVOCION PORTEÑO"</a></td></tr>
+            <tr><td class="hidden">40</td><td class="hidden">40</td><td class="hidden">140</td><td class="hidden">CAPORALES</td><td>40</td><td>40</td><td></td><td><a href="caporales\c-sur.html">ESCUELA INTERNACIONAL DEL FOLKLORE CAPORALES DEL SUR PUNO</a></td></tr>
+            <tr><td class="hidden">43</td><td class="hidden">176</td><td class="hidden">76</td><td class="hidden">CAPORALES</td><td>43</td><td></td><td>76</td><td><a href="caporales\c-victoria.html">ASOCIACION FOLKLORICA "CAPORALES VICTORIA" - PUNO</a></td></tr>
+            <tr><td class="hidden">54</td><td class="hidden">167</td><td class="hidden">67</td><td class="hidden">CAPORALES</td><td>54</td><td></td><td>67</td><td><a href="caporales\centralistas.html">ASOCIACION CULTURAL CAPORALES CENTRALISTAS PUNO</a></td></tr>
+            <tr><td class="hidden">61</td><td class="hidden">35</td><td class="hidden">135</td><td class="hidden">CAPORALES</td><td>61</td><td>35</td><td></td><td><a href="caporales\pitones.html">ASOCIACION DE ARTE, CULTURA Y FOLKLORE CAPORALES DE SIEMPRE - PITONES</a></td></tr>
+            <tr><td class="hidden">67</td><td class="hidden">160</td><td class="hidden">60</td><td class="hidden">CAPORALES</td><td>67</td><td></td><td>60</td><td><a href="caporales\c-huascar.html">ASOCIACION CULTURAL FOLKLORICA CAPORALES HUASCAR</a></td></tr>
+            <tr><td class="hidden">69</td><td class="hidden">14</td><td class="hidden">114</td><td class="hidden">CAPORALES</td><td>69</td><td>14</td><td></td><td><a href="caporales\catumi.html">CONJUNTO FOLKLORICO LOS CAPORALES DELA TUNTUNA DEL BARRIO MIRAFLORES CATUMI - PUNO</a></td></tr>
+            <tr><td class="hidden">71</td><td class="hidden">31</td><td class="hidden">131</td><td class="hidden">CAPORALES</td><td>71</td><td>31</td><td></td><td><a href="caporales\qoillor-ritty.html">FRATERNIDAD ARTISTICA SAMBOS CAPORALES SEÑOR DE QOILLOR - RITTY</a></td></tr>
+            <tr><td class="hidden">75</td><td class="hidden">24</td><td class="hidden">124</td><td class="hidden">CAPORALES</td><td>75</td><td>24</td><td></td><td><a href="caporales\legado.html">ASOCIACION CULTURAL FOLKLORICA "LEGADO CAPORAL"</a></td></tr>
+            <tr><td class="hidden">80</td><td class="hidden">163</td><td class="hidden">63</td><td class="hidden">CAPORALES</td><td>80</td><td></td><td>63</td><td><a href="caporales\san-juan.html">ASOCIACION DE ARTE Y FOLCLORE CAPORALES SAN JUAN BAUTISTA - PUNO</a></td></tr>
+            <tr><td class="hidden">84</td><td class="hidden">4</td><td class="hidden">104</td><td class="hidden">CAPORALES</td><td>84</td><td>4</td><td></td><td><a href="caporales\vientos-sur.html">FRATERNIDAD CAPORALES VIRGEN DE LA CANDELARIA "VIENTOS DEL SUR"</a></td></tr>
+            <tr><td class="hidden">92</td><td class="hidden">46</td><td class="hidden">146</td><td class="hidden">CAPORALES</td><td>92</td><td>46</td><td></td><td><a href="caporales\afovic.html">ASOCIACION FOLKLORICA VIRGEN DE LA CANDELARIA - AFOVIC</a></td></tr>
+            <tr><td class="hidden">97.1</td><td class="hidden">48.1</td><td class="hidden">148.1</td><td class="hidden">CAPORALES</td><td>-</td><td>-</td><td></td><td><a href="caporales\viejo-sj.html">ASOCIACION CULTURAL CAPORALES MI VIEJO SJ</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie -->
+  <footer>
+    <p>#CANDELARIA2026</p>
+    <p>bailaencandelaria@gmail.com</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+
+  <script>
+    const buttons = document.querySelectorAll(".buttons button");
+    const buscador = document.getElementById("buscador");
+    const table = document.getElementById("caporalesTable");
+
+    function sortTable(colIndex, btn, alpha = false) {
+      buttons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const table = document.getElementById("caporalesTable");
+      const rows = Array.from(table.rows).slice(1);
+      rows.sort((a, b) => {
+        let valA = a.cells[colIndex].innerText.trim();
+        let valB = b.cells[colIndex].innerText.trim();
+        if (alpha) return valA.localeCompare(valB);
+        valA = parseFloat(valA) || 9999;
+        valB = parseFloat(valB) || 9999;
+        return valA - valB;
+      });
+      rows.forEach(r => table.tBodies[0].appendChild(r));
+    }
+    
+    buscador.addEventListener("input", () => {
+      const filtro = buscador.value.toLowerCase();
+      Array.from(table.tBodies[0].rows).forEach(row => {
+        const nombre = row.cells[7].innerText.toLowerCase();
+        row.style.display = nombre.includes(filtro) ? "" : "none";
+      });
+    });
+
+    window.onload = () => sortTable(0, document.getElementById("domingo"));
+  </script>
+
+</body>
+</html>
