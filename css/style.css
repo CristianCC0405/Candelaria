@@ -104,7 +104,7 @@ nav img.tiktok-icon{height:18px;alling-items:center}
 }
 
 @media (max-width: 768px) {
-  .hero .h1 {
+  .hero .fondo {
     aspect-ratio: 22/9;
   }
   
