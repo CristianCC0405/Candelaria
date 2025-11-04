@@ -422,7 +422,6 @@ main{
 @media (min-width: 768px) {
   .categorias-grid {
     grid-template-columns: repeat(4, 1fr); /* 4 columnas */
-    justify-content: center;
   }
   .categoria {
     height: 200px;
