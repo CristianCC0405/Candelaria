@@ -292,13 +292,13 @@ main{
 
 /* ---------- */
 
-/* SECCIÓN TRAJES */
-#trajes {
+/* SECCIÓN YO-BAILO */
+#yo-bailo {
   text-align: center;
   padding: 0px 10px;
 }
 
-#trajes h1 {
+#yo-bailo h1 {
   color: #7f6000;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -306,7 +306,7 @@ main{
   font-size: 50px;
 }
 
-#trajes p {
+#yo-bailo p {
   color: #555;
   margin-bottom: 30px;
   font-size: 20px;
@@ -361,13 +361,13 @@ main{
 
 /* ---------- */
 
-/* SECCIÓN COMERCIO */
-#comercio {
+/* SECCIÓN YO-VEO */
+#yo-veo {
   text-align: center;
   padding: 0px 10px;
 }
 
-#comercio h1 {
+#yo-veo h1 {
   color: #7f6000;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -375,7 +375,7 @@ main{
   font-size: 50px;
 }
 
-#comercio p {
+#yo-veo p {
   color: #555;
   margin-bottom: 30px;
   font-size: 20px;
