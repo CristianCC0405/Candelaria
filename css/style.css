@@ -50,13 +50,6 @@ header{
   text-decoration:none
 }
 
-@media (max-width: 768px) {
-  nav .separador {
-    display: none;
-  }
-}
-
-
 /* NAV */
 nav{display:flex;align-items:center;gap:25px}
 nav a{text-decoration:none;color:#7f6000;font-size:18px;font-weight:bold;text-transform:uppercase}
@@ -163,6 +156,7 @@ main{
   nav.active{display:flex}
   .menu-icon{display:block}
   .hero h1{font-size:22px;padding:24px}
+  nav .separador {display: none}
 }
 
 /* RANKING SECTION */
