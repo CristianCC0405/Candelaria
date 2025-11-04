@@ -50,6 +50,13 @@ header{
   text-decoration:none
 }
 
+@media (max-width: 768px) {
+  nav .separador {
+    display: none;
+  }
+}
+
+
 /* NAV */
 nav{display:flex;align-items:center;gap:25px}
 nav a{text-decoration:none;color:#7f6000;font-size:18px;font-weight:bold;text-transform:uppercase}
