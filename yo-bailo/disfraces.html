@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Disfraces – Yo Bailo | #CANDELARIA2026</title>
+  <link rel="icon" href="../img/favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/disfraces.css"> <!-- hoja adicional -->
+</head>
+<body>
+  <header>
+    <a href="../index.html" class="logo">
+      <img src="../img/logo.png" alt="logo">
+      <span>#CANDELARIA2026</span>
+    </a>
+
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <nav>
+      <a href="../index.html">Inicio</a>
+      <a href="../danzas.html">Danzas</a>
+      <a href="../orden.html">Orden</a>
+      <a class="separador">|</a>
+      <a href="../yo-bailo.html" class="activo">Yo bailo</a>
+      <a href="../yo-veo.html">Yo veo</a>
+      <a class="separador">|</a>
+      <a href="https://www.tiktok.com/@bailaencandelaria" target="_blank" rel="noreferrer">
+        <img src="../img/tiktok.png" alt="TikTok" class="tiktok-icon">
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="disfraces">
+      <h1>DISFRACES</h1>
+      <p>Descubre los mejores talleres y diseñadores de trajes para la Candelaria</p>
+
+      <div class="lista-negocios">
+        <!-- NEGOCIO 1 -->
+        <div class="negocio" onclick="toggleDetalles(this)">
+          <img src="../img/negocio1.jpg" alt="Negocio 1" class="foto-circular">
+          <div class="info-breve">
+            <h2>Galeno Disfraces</h2>
+            <p>Puno – Jr. Lima 567</p>
+            <p>📞 987654321</p>
+          </div>
+
+          <div class="detalles">
+            <p><strong>Descripción:</strong> Especialistas en trajes típicos y bordados finos para comparsas de morenada y caporales.</p>
+            <p><strong>Redes:</strong> <a href="https://instagram.com/galenodisfraces" target="_blank">@galenodisfraces</a></p>
+
+            <div class="galeria">
+              <img src="../img/galeno1.jpg" alt="Foto 1">
+              <button class="prev" onclick="cambiarFoto(this, -1)">◀</button>
+              <button class="next" onclick="cambiarFoto(this, 1)">▶</button>
+              <div class="fotos" style="display:none;">
+                <img src="../img/galeno2.jpg" alt="Foto 2">
+                <img src="../img/galeno3.jpg" alt="Foto 3">
+                <img src="../img/galeno4.jpg" alt="Foto 4">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Puedes copiar el bloque anterior para más negocios -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>#CANDELARIA2026</p>
+    <p>bailaencandelaria@gmail.com</p>
+  </footer>
+
+  <script src="../js/script.js"></script>
+  <script src="../js/disfraces.js"></script>
+</body>
+</html>
