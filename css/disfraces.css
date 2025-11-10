@@ -10,7 +10,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 10px;
-  font-size: 50px;
+  font-size: 30px;
 }
 
 #disfraces p {
@@ -28,25 +28,31 @@
 /* ---------- */
 
 /* ===== Estilos para la lista de negocios ===== */
+/* ===== Diseño general ===== */
 
 .lista-negocios {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
   margin: 30px auto;
-  max-width: 800px;
+  max-width: 1000px;
 }
+
+/* ===== BLOQUE NO PULSADO ===== */
 
 .negocio {
   background: #fff;
   border: 2px solid #7f6000;
   border-radius: 16px;
   padding: 15px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  cursor: pointer;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
   transition: all 0.3s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .negocio:hover {
@@ -54,59 +60,111 @@
 }
 
 .foto-circular {
-  width: 80px;
-  height: 80px;
+  width: 90%;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #7f6000;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.info-breve {
+  text-align: left;
+  width: 90%;
 }
 
 .info-breve h2 {
-  margin: 0;
-  font-size: 1.1em;
+  font-size: 20px;
+  margin: 5px 0 0 10px;
+  color: #7f6000;
 }
+
+.info-breve p {
+  font-size: 18px;
+  margin: 2px 0 0 10px;
+  color: #555;
+}
+
+/* ===== BLOQUE PULSADO ===== */
 
 .detalles {
   display: none;
-  margin-top: 15px;
+  margin-top: 10px;
   width: 100%;
-  grid-column: 1 / -1;
-}
-
-.negocio.activo .detalles {
-  display: block;
+  position: relative;
   animation: fadeIn 0.4s ease-in-out;
 }
 
-.galeria {
-  position: relative;
-  text-align: center;
-  margin-top: 10px;
+.negocio.activo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.galeria img {
+.negocio.activo .foto-circular,
+.negocio.activo .info-breve {
+  display: none;
+}
+
+.negocio.activo .detalles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   width: 100%;
-  max-width: 400px;
-  border-radius: 10px;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
-.galeria button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.4);
-  color: #fff;
-  border: none;
-  font-size: 1.2em;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 50%;
+.detalles h2 {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  color: #7f6000;
+  margin-bottom: 10px;
 }
 
-.galeria .prev { left: 10px; }
-.galeria .next { right: 10px; }
+.detalles p {
+  font-size: 16px;
+  color: #333;
+  margin: 3px 0;
+  width: 55%;
+}
 
+.detalles a {
+  color: #7f6000;
+  text-decoration: none;
+}
+
+.imagen-derecha {
+  width: 40%;
+  text-align: right;
+}
+
+.imagen-derecha img {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #7f6000;
+}
+
+/* Animación */
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity: 1;}
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 768px) {
+  .lista-negocios {
+    grid-template-columns: 1fr;
+  }
+  .detalles p, .imagen-derecha {
+    width: 100%;
+  }
+  .imagen-derecha {
+    text-align: center;
+    margin-top: 10px;
+  }
 }
