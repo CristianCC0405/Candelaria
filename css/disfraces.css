@@ -131,10 +131,13 @@
 
 /* ===== Responsivo ===== */
 @media (max-width: 768px) {
+  .negocio {
+    width: 85%;
+  }
   .lista-negocios {
     grid-template-columns: 1fr;
   }
-    .imagen-derecha {
+  .imagen-derecha {
     margin-top: 10px;
   }
 }
