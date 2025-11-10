@@ -131,9 +131,13 @@
 
 /* ===== Responsivo ===== */
 @media (max-width: 768px) {
+  .negocio {
+    width: 100%;
+  }
   .lista-negocios {
     grid-template-columns: 1fr;
     gap: 10px;
+    width: 95%;
   }
   .imagen-derecha {
     margin-top: 10px;
