@@ -142,4 +142,10 @@
   .imagen-derecha {
     margin-top: 10px;
   }
+  #disfraces {
+    padding: 0px 10px;
+  }
+  #disfraces h1 {
+    font-size: 30px;
+  }
 }
