@@ -28,7 +28,7 @@
 /* ---------- */
 
 /* ===== Estilos para la lista de negocios ===== */
-/* ===== Diseño general ===== */
+/* ===== DISEÑO GENERAL ===== */
 
 .lista-negocios {
   display: grid;
@@ -45,45 +45,46 @@
   border: 2px solid #7f6000;
   border-radius: 16px;
   padding: 15px;
-  text-align: left;
-  position: relative;
-  overflow: hidden;
   transition: all 0.3s;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .negocio:hover {
   background: #fffaf0;
 }
 
+/* imagen + texto en la misma fila */
+.info-breve {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .foto-circular {
-  width: 10%;
-  aspect-ratio: 1 / 1;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #7f6000;
-  margin-bottom: 10px;
-  transition: 0.3s;
+  flex-shrink: 0;
 }
 
-.info-breve {
-  text-align: left;
-  width: 90%;
+.texto-breve {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.info-breve h2 {
+.texto-breve h2 {
   font-size: 20px;
-  margin: 5px 0 0 10px;
   color: #7f6000;
+  margin: 0;
 }
 
-.info-breve p {
+.texto-breve p {
   font-size: 18px;
-  margin: 2px 0 0 10px;
   color: #555;
+  margin: 2px 0 0;
 }
 
 /* ===== BLOQUE PULSADO ===== */
@@ -92,17 +93,9 @@
   display: none;
   margin-top: 10px;
   width: 100%;
-  position: relative;
   animation: fadeIn 0.4s ease-in-out;
 }
 
-.negocio.activo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.negocio.activo .foto-circular,
 .negocio.activo .info-breve {
   display: none;
 }
@@ -111,7 +104,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
   align-items: flex-start;
   flex-wrap: wrap;
 }
@@ -119,13 +111,13 @@
 .detalles h2 {
   width: 100%;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   color: #7f6000;
   margin-bottom: 10px;
 }
 
 .detalles p {
-  font-size: 16px;
+  font-size: 18px;
   color: #333;
   margin: 3px 0;
   width: 55%;
@@ -160,11 +152,15 @@
   .lista-negocios {
     grid-template-columns: 1fr;
   }
+  .detalles {
+    flex-direction: column;
+    align-items: center;
+  }
   .detalles p, .imagen-derecha {
     width: 100%;
+    text-align: center;
   }
   .imagen-derecha {
-    text-align: center;
     margin-top: 10px;
   }
 }
