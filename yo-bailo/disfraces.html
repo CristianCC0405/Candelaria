@@ -43,7 +43,7 @@
           <div class="info-breve">
             <img src="../img/Disfraces/img-disfraces-1.jpg" alt="Negocio 1" class="foto-circular">
             <div class="texto-breve">
-              <h2>Abc Disfraces</h2>
+              <h2>Abc Disfraces 01</h2>
                 <div class="alineado">
                   <div class="fila"><span class="campo">Ciudad</span><span class="valor">-</span></div>
                   <div class="fila"><span class="campo">Dirección</span><span class="valor">-</span></div>
@@ -59,7 +59,7 @@
           <div class="info-breve">
             <img src="../img/Disfraces/img-disfraces-2.jpg" alt="Negocio 1" class="foto-circular">
             <div class="texto-breve">
-              <h2>Abc Disfraces</h2>
+              <h2>Abc Disfraces 02</h2>
                 <div class="alineado">
                   <div class="fila"><span class="campo">Ciudad</span><span class="valor">-</span></div>
                   <div class="fila"><span class="campo">Dirección</span><span class="valor">-</span></div>
@@ -75,7 +75,7 @@
           <div class="info-breve">
             <img src="../img/Disfraces/img-disfraces-3.jpg" alt="Negocio 1" class="foto-circular">
             <div class="texto-breve">
-              <h2>Abc Disfraces</h2>
+              <h2>Abc Disfraces 03</h2>
                 <div class="alineado">
                   <div class="fila"><span class="campo">Ciudad</span><span class="valor">-</span></div>
                   <div class="fila"><span class="campo">Dirección</span><span class="valor">-</span></div>
@@ -91,7 +91,7 @@
           <div class="info-breve">
             <img src="../img/Disfraces/img-disfraces-4.jpg" alt="Negocio 1" class="foto-circular">
             <div class="texto-breve">
-              <h2>Abc Disfraces</h2>
+              <h2>Abc Disfraces 04</h2>
                 <div class="alineado">
                   <div class="fila"><span class="campo">Ciudad</span><span class="valor">-</span></div>
                   <div class="fila"><span class="campo">Dirección</span><span class="valor">-</span></div>
@@ -107,7 +107,7 @@
           <div class="info-breve">
             <img src="../img/Disfraces/img-disfraces-5.jpg" alt="Negocio 1" class="foto-circular">
             <div class="texto-breve">
-              <h2>Abc Disfraces</h2>
+              <h2>Abc Disfraces 05</h2>
                 <div class="alineado">
                   <div class="fila"><span class="campo">Ciudad</span><span class="valor">-</span></div>
                   <div class="fila"><span class="campo">Dirección</span><span class="valor">-</span></div>
@@ -123,7 +123,7 @@
           <div class="info-breve">
             <img src="../img/Disfraces/img-disfraces-6.jpg" alt="Negocio 1" class="foto-circular">
             <div class="texto-breve">
-              <h2>Abc Disfraces</h2>
+              <h2>Abc Disfraces 06</h2>
                 <div class="alineado">
                   <div class="fila"><span class="campo">Ciudad</span><span class="valor">-</span></div>
                   <div class="fila"><span class="campo">Dirección</span><span class="valor">-</span></div>
@@ -139,7 +139,7 @@
           <div class="info-breve">
             <img src="../img/Disfraces/img-disfraces-7.jpg" alt="Negocio 1" class="foto-circular">
             <div class="texto-breve">
-              <h2>Abc Disfraces</h2>
+              <h2>Abc Disfraces 07</h2>
                 <div class="alineado">
                   <div class="fila"><span class="campo">Ciudad</span><span class="valor">-</span></div>
                   <div class="fila"><span class="campo">Dirección</span><span class="valor">-</span></div>
@@ -155,7 +155,7 @@
           <div class="info-breve">
             <img src="../img/Disfraces/img-disfraces-8.jpg" alt="Negocio 1" class="foto-circular">
             <div class="texto-breve">
-              <h2>Abc Disfraces</h2>
+              <h2>Abc Disfraces 08</h2>
                 <div class="alineado">
                   <div class="fila"><span class="campo">Ciudad</span><span class="valor">-</span></div>
                   <div class="fila"><span class="campo">Dirección</span><span class="valor">-</span></div>
@@ -175,6 +175,21 @@
     <p>#CANDELARIA2026</p>
     <p>bailaencandelaria@gmail.com</p>
   </footer>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const contenedor = document.querySelector('.lista-negocios');
+    const negocios = Array.from(contenedor.children);
+
+    // Mezcla aleatoriamente los elementos
+    const negociosMezclados = negocios.sort(() => Math.random() - 0.5);
+
+    // Limpia el contenedor y vuelve a agregar los elementos en orden aleatorio
+    contenedor.innerHTML = '';
+    negociosMezclados.forEach(negocio => contenedor.appendChild(negocio));
+  });
+</script>
+
 
   <script src="../js/script.js"></script>
 </body>
