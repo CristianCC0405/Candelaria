@@ -61,9 +61,9 @@
 }
 
 .foto-circular {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  border-radius: 10%;
   object-fit: cover;
   border: 2px solid #7f6000;
   flex-shrink: 0;
@@ -106,7 +106,7 @@
     }
 
     .campo {
-      width: 100px; /* ancho fijo para alinear */
+      width: 50px; /* ancho fijo para alinear */
       text-align: left;
       font-weight: lighter;
       color: black;
@@ -133,6 +133,7 @@
 @media (max-width: 768px) {
   .lista-negocios {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
   .imagen-derecha {
     margin-top: 10px;
