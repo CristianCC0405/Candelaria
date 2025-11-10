@@ -149,3 +149,21 @@
     font-size: 45px;
   }
 }
+
+/* ===== Ocultar etiquetas (.campo) en móviles ===== */
+@media (max-width: 768px) {
+  .fila .campo {
+    display: none;
+  }
+
+  /* Ajuste para que el texto de valor ocupe todo el ancho */
+  .fila .valor {
+    flex: 1;
+    color: black;
+  }
+
+  /* Quita los dos puntos automáticos antes del texto */
+  .valor::before {
+    content: "";
+  }
+}
