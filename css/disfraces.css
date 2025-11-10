@@ -166,4 +166,9 @@
   .valor::before {
     content: "";
   }
+
+  .valor {
+    margin-left: 0px;
+    text-align: left;
+  }
 }
