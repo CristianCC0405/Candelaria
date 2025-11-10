@@ -88,60 +88,38 @@
   margin: 1px 0 0;
 }
 
-/* ===== BLOQUE PULSADO ===== */
+/* ---------- BLOQUES ALINEADOS ---------- */
+    .alineado {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 5px;
+      padding-left: 1em;
+    }
 
-.detalles {
-  display: none;
-  margin-top: 10px;
-  width: 100%;
-  animation: fadeIn 0.4s ease-in-out;
-}
+    .fila {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
 
-.negocio.activo .info-breve {
-  display: none;
-}
+    .campo {
+      width: 100px; /* ancho fijo para alinear */
+      text-align: left;
+      font-weight: lighter;
+      color: black;
+    }
 
-.negocio.activo .detalles {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
+    .valor::before {
+      content: ": ";
+      margin-left: 4px;
+    }
 
-.detalles h2 {
-  width: 100%;
-  text-align: center;
-  font-size: 20px;
-  color: #7f6000;
-  margin-bottom: 0px;
-}
+    .valor {
+      flex: 1;
+      color: black;
+    }
 
-.detalles p {
-  font-size: 18px;
-  font-weight: lighter;
-  color: #333;
-  margin: 1px 0;
-  width: 40%;
-}
-
-.detalles a {
-  color: #7f6000;
-  text-decoration: none;
-}
-
-.imagen-derecha {
-  width: 40%;
-  text-align: right;
-}
-
-.imagen-derecha img {
-  width: 100%;
-  max-height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 2px solid #7f6000;
-}
 
 /* Animación */
 @keyframes fadeIn {
@@ -154,15 +132,7 @@
   .lista-negocios {
     grid-template-columns: 1fr;
   }
-  .detalles {
-    flex-direction: column;
-    align-items: center;
-  }
-  .detalles p, .imagen-derecha {
-    width: 100%;
-    text-align: center;
-  }
-  .imagen-derecha {
+    .imagen-derecha {
     margin-top: 10px;
   }
 }
