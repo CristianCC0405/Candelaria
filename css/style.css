@@ -120,19 +120,31 @@ nav img.tiktok-icon{height:18px;alling-items:center}
 .banner1{
   display: block;
   width:70%;
-  max-width: 800px;
-  aspect-ratio:32/9;
+  max-width: 1000px;
+  aspect-ratio:40/9;
   object-fit:cover;
   margin:20px auto 0 auto;
+}
+
+@media (max-width: 768px) {
+  .banner1 {
+    width: 90%;
+  }
 }
 
 .banner2{
   display:block;
   width:70%;
-  max-width:800px;
-  aspect-ratio:32/9;
+  max-width:1000px;
+  aspect-ratio:40/9;
   object-fit:cover;
-  margin:30px auto 20px auto;
+  margin:20px auto 0 auto;
+}
+
+@media (max-width: 768px) {
+  .banner2 {
+    width: 90%;
+  }
 }
 
 /* FOOTER */
@@ -162,7 +174,7 @@ main{
 /* RANKING SECTION */
 #ranking {
   text-align: center;
-  padding: 0px 20px;
+  padding: 20px 20px 0 20px;
 }
 
 #ranking h2 {
