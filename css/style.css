@@ -120,21 +120,15 @@ nav img.tiktok-icon{height:18px;alling-items:center}
 .banner1{
   display: block;
   max-width: 1000px;
-  aspect-ratio:40/9;
+  aspect-ratio:32/9;
   object-fit:cover;
   margin:20px 20px 0 20px;
-}
-
-@media (max-width: 768px) {
-  .banner1 {
-    width: 100%;
-  }
 }
 
 .banner2{
   display:block;
   max-width:1000px;
-  aspect-ratio:40/9;
+  aspect-ratio:32/9;
   object-fit:cover;
   margin:20px 20px 0 20px;
 }
