@@ -128,6 +128,7 @@ nav img.tiktok-icon{height:18px;alling-items:center}
 .banners img {
   display: block;
   width: 100%;
+  max-width: none;
   aspect-ratio: 32/9;
   object-fit: cover;
   border-radius: 10px;
