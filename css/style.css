@@ -232,43 +232,6 @@ main{
   }
 }
 
-/* Celulares */
-@media (max-width: 767px) {
-  /* Ocultamos banners del bloque superior (solo mostrarán intercalados) */
-  .banners {
-    display: none;
-  }
-
-  /* Intercalar banners entre filas del ranking */
-  #ranking {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    padding: 20px;
-  }
-
-  #ranking .agrupacion:nth-child(1),
-  #ranking .agrupacion:nth-child(2) {
-    grid-column: span 1;
-  }
-
-  #ranking::before {
-    content: "";
-    grid-column: 1 / -1;
-    background: url('img/banner1.jpg') center/cover no-repeat;
-    aspect-ratio: 32/9;
-    border-radius: 10px;
-  }
-
-  #ranking::after {
-    content: "";
-    grid-column: 1 / -1;
-    background: url('img/banner2.jpg') center/cover no-repeat;
-    aspect-ratio: 32/9;
-    border-radius: 10px;
-  }
-}
-
 /* SECCIÓN DANZAS */
 #danzas {
   text-align: center;
