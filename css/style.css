@@ -117,28 +117,22 @@ nav img.tiktok-icon{height:18px;alling-items:center}
   }
 }
 
-.banner1{
+/* BANNERS */
+.banners {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 20px 0 20px;
+}
+
+.banners img {
   display: block;
   width: 100%;
   max-width: 1000px;
-  aspect-ratio:32/9;
-  object-fit:cover;
-  margin:20px 20px 0 20px;
-}
-
-.banner2{
-  display:block;
-  width: 100%;
-  max-width:1000px;
-  aspect-ratio:32/9;
-  object-fit:cover;
-  margin:20px 20px 0 20px;
-}
-
-@media (max-width: 768px) {
-  .banner2 {
-    width: 100%;
-  }
+  aspect-ratio: 32/9;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 /* FOOTER */
@@ -221,11 +215,58 @@ main{
 
 /* Laptop o pantallas grandes */
 @media (min-width: 768px) {
+  .banners {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin: 20px 20px 0 20px;
+  }
+  .banners img {
+    width: calc(50% - 7.5px);
+    max-width: none;
+  }
   .ranking-grid {
     grid-template-columns: repeat(6, 1fr); /* 6 columnas */
+    margin-top: 20px;
   }
   .agrupacion {
     height: 200px;
+  }
+}
+
+/* Celulares */
+@media (max-width: 767px) {
+  /* Ocultamos banners del bloque superior (solo mostrarán intercalados) */
+  .banners {
+    display: none;
+  }
+
+  /* Intercalar banners entre filas del ranking */
+  #ranking {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  #ranking .agrupacion:nth-child(1),
+  #ranking .agrupacion:nth-child(2) {
+    grid-column: span 1;
+  }
+
+  #ranking::before {
+    content: "";
+    grid-column: 1 / -1;
+    background: url('img/banner1.jpg') center/cover no-repeat;
+    aspect-ratio: 32/9;
+    border-radius: 10px;
+  }
+
+  #ranking::after {
+    content: "";
+    grid-column: 1 / -1;
+    background: url('img/banner2.jpg') center/cover no-repeat;
+    aspect-ratio: 32/9;
+    border-radius: 10px;
   }
 }
 
