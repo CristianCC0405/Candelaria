@@ -230,6 +230,7 @@ main{
     flex-wrap: nowrap;
     justify-content: center;
     gap: 15px;
+    max-width: none;
   }
   .banners img {
     max-width: none;
