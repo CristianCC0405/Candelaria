@@ -233,7 +233,7 @@ main{
 
 @media (max-width: 768px) {
   .ranking-grid {
-    margin: 20px;
+    margin-top: 20px;
   }
 }
 
