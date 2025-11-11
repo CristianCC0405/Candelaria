@@ -125,7 +125,7 @@ nav img.tiktok-icon{height:18px;alling-items:center}
   gap: 15px;
 }
 
-.banners img {
+.banners a {
   display: block;
   width: 100%;
   max-width: 1000px;
