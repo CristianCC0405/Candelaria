@@ -217,7 +217,6 @@ main{
   .banners {
     flex-wrap: nowrap;
     justify-content: space-between;
-    margin: 0;
   }
   .banners img {
     width: calc(50% - 7.5px);
