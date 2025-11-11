@@ -231,6 +231,12 @@ main{
   }
 }
 
+@media (max-width: 768px) {
+  .ranking-grid {
+    margin: 20px;
+  }
+}
+
 /* SECCIÓN DANZAS */
 #danzas {
   text-align: center;
