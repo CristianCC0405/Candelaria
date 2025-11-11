@@ -217,9 +217,22 @@ main{
 @media (min-width: 768px) {
   .ranking-grid {
     grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+    display: grid;
+    grid-template-areas: "danzas orden doble ponchitos";
+    allign-items: stretch;
   }
   .agrupacion {
     height: 200px;
+  }
+  
+  .agrupacion:nth-child(1) { grid-area: danzas; }
+  .agrupacion:nth-child(2) { grid-area: orden; }
+  .agrupacion-doble { grid-area: doble; display: flex; flex-direction: column; gap: 15px; }
+  .agrupacion:nth-child(4) { grid-area: ponchitos; }
+
+  /* Las tarjetas dentro del bloque doble son más pequeñas */
+  .agrupacion-doble .agrupacion {
+    height: calc((200px - 15px) / 2); /* mitad de altura, manteniendo el gap */
   }
 }
 
