@@ -127,7 +127,8 @@ nav img.tiktok-icon{height:18px;alling-items:center}
 
 .banners img {
   display: block;
-  width: 100%;
+  flex: 1 1 calc(50% - 7.5px);
+  width: calc(50% - 7.5px);
   max-width: none;
   aspect-ratio: 32/9;
   object-fit: cover;
@@ -227,10 +228,10 @@ main{
 @media (min-width: 768px) {
   .banners {
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 15px;
   }
   .banners img {
-    width: 100%;
     max-width: none;
   }
   .ranking-grid {
