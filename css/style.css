@@ -224,6 +224,10 @@ main{
   .agrupacion {
     height: 200px;
   }
+
+  .agrupacion-doble {
+    height: 200px;
+  }
   
   .agrupacion:nth-child(1) { grid-area: danzas; }
   .agrupacion:nth-child(2) { grid-area: orden; }
