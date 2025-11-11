@@ -119,6 +119,7 @@ nav img.tiktok-icon{height:18px;alling-items:center}
 
 .banner1{
   display: block;
+  width: 100%;
   max-width: 1000px;
   aspect-ratio:32/9;
   object-fit:cover;
@@ -127,6 +128,7 @@ nav img.tiktok-icon{height:18px;alling-items:center}
 
 .banner2{
   display:block;
+  width: 100%;
   max-width:1000px;
   aspect-ratio:32/9;
   object-fit:cover;
