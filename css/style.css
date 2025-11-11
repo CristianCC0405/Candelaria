@@ -227,6 +227,7 @@ main{
 
   .agrupacion-doble {
     height: 200px;
+    gap: 12px;
   }
   
   .agrupacion:nth-child(1) { grid-area: danzas; }
@@ -235,8 +236,8 @@ main{
   .agrupacion:nth-child(4) { grid-area: ponchitos; }
 
   /* Las tarjetas dentro del bloque doble son más pequeñas */
-  .agrupacion-doble .agrupacion {
-    height: calc((200px - 15px) / 2); /* mitad de altura, manteniendo el gap */
+  .agrupacion-simple {
+    height: 94px;
   }
 }
 
