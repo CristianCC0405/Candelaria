@@ -120,15 +120,18 @@ nav img.tiktok-icon{height:18px;alling-items:center}
 /* BANNERS */
 .banners {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   gap: 15px;
 }
 
+.banner a {
+  flex: 1;
+}
 .banners img {
   display: block;
   flex: 1 1 calc(50% - 7.5px);
-  width: calc(50% - 7.5px);
+  width: 100%;
   max-width: none;
   aspect-ratio: 32/9;
   object-fit: cover;
