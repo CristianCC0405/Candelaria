@@ -212,6 +212,17 @@ main{
   backdrop-filter: blur(2px);
 }
 
+.agrupacion {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.agrupacion span {
+  text-decoration: none;
+}
+
 /* Laptop o pantallas grandes */
 @media (min-width: 768px) {
   .banners {
@@ -219,7 +230,7 @@ main{
     justify-content: space-between;
   }
   .banners img {
-    width: calc(50% - 7.5px);
+    width: calc(100%);
     max-width: none;
   }
   .ranking-grid {
