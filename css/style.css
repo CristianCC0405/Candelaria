@@ -233,6 +233,9 @@ main{
     width: 100%;
     max-width: none;
   }
+  .banners a {
+    width: calc(50% - 7.5px);
+  }
   .ranking-grid {
     grid-template-columns: repeat(6, 1fr); /* 6 columnas */
     margin-top: 20px;
