@@ -169,27 +169,21 @@
       </div>
 
     </section>
+
+    <div style="text-align:center; margin: 40px 0;">
+      <a href="../php/login.html" 
+        style="color:#000; font-weight:bold; font-size:18px; text-decoration:none;">
+        HAZ CLIC - AQUÍ -
+        PARA PUBLICAR TU NEGOCIO
+      </a>
+    </div>
+
   </main>
 
   <footer>
     <p>#CANDELARIA2026</p>
     <p>bailaencandelaria@gmail.com</p>
   </footer>
-
-  <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const contenedor = document.querySelector('.lista-negocios');
-    const negocios = Array.from(contenedor.children);
-
-    // Mezcla aleatoriamente los elementos
-    const negociosMezclados = negocios.sort(() => Math.random() - 0.5);
-
-    // Limpia el contenedor y vuelve a agregar los elementos en orden aleatorio
-    contenedor.innerHTML = '';
-    negociosMezclados.forEach(negocio => contenedor.appendChild(negocio));
-  });
-</script>
-
 
   <script src="../js/script.js"></script>
 </body>
