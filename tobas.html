@@ -98,8 +98,20 @@
       text-align: center;
     }
 
+    @media (min-width: 768px) {
+      .table-container {
+        width: 60%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .table-container {
+        width: 100%;
+      }
+    }
+
     table {
-      width: 60%;
+      width: 100%;
       max-width: 900px;
       border-collapse: collapse;
       font-size: 14px;
@@ -188,6 +200,52 @@
         padding: 6px;
       }
     }
+
+    /* === BANNERS LATERALES (solo laptop) === */
+    .banners-laterales {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .banner-vertical {
+      width: 200px;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* Ocultar en celulares */
+    @media (max-width: 768px) {
+      .banner-vertical {
+        display: none;
+      }
+    }
+
+    /* === BANNER HORIZONTAL SOLO EN CELULAR === */
+    .banner-horizontal {
+      width: 90%;
+      max-width: 600px;
+      margin: 0 auto;
+      display: none;
+    }
+
+    .banner-horizontal img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .banner-horizontal {
+        display: block;
+      }
+    }
+
+    
     .hidden { display: none; }
   </style>
 </head>
@@ -221,6 +279,11 @@
       <h1>TOBAS</h1>
       <p>¡ORDENA SEGÚN TU PREFERENCIA!</p>
 
+      <!-- Banner horizontal SOLO para celular -->
+      <div class="banner-horizontal">
+        <img src="img/banners/tobas/banner-hor.jpg" alt="Banner">
+      </div>
+
       <div class="controls">
         <div class="buttons">
           <button id="domingo" class="active" onclick="sortTable(0, this)">Domingo</button>
@@ -229,6 +292,10 @@
         </div>
         <input type="text" id="buscador" placeholder="Buscar conjunto ...">
       </div>
+
+      <div class="banners-laterales">
+        <img src="img/banners/tobas/banner-izq.jpg" class="banner-vertical izquierda" alt="Banner Izq">
+
        <div class="table-container">
         <table id="tobasTable">
           <thead>
@@ -250,6 +317,8 @@
             <tr><td class="hidden">77</td><td class="hidden">32</td><td class="hidden">132</td><td class="hidden">TOBAS</td><td>77</td><td>32</td><td></td><td><a href="tobas\anata.html">ASOCIACION CULTURAL FOLKLORICA TOBAS AMAZONAS ANATA</a></td></tr>
           </tbody>
         </table>
+        </div>
+        <img src="img/banners/tobas/banner-der.jpg" class="banner-vertical derecha" alt="Banner Der">
       </div>
     </section>
   </main>
