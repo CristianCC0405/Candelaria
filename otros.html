@@ -188,6 +188,56 @@
         padding: 6px;
       }
     }
+
+    /* === BANNERS LATERALES (solo laptop) === */
+    .banners-laterales {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .banner-vertical {
+      width: 200px;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* Ocultar en celulares */
+    @media (max-width: 768px) {
+      .banner-vertical {
+        display: none;
+      }
+    }
+
+    /* === BANNER HORIZONTAL SOLO EN CELULAR === */
+    .banner-horizontal {
+      width: 100%;
+      max-width: 600px;
+      margin: 10px auto 20px auto;
+      display: none;
+    }
+
+    .banner-horizontal img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .banner-horizontal {
+        display: block;
+      }
+    }
+
+    /* Asegurar que la tabla no se haga demasiado pequeña en laptop */
+    .table-container {
+      max-width: 900px;
+    }
+
     .hidden { display: none; }
   </style>
 </head>
@@ -221,6 +271,11 @@
       <h1>OTROS</h1>
       <p>¡ORDENA SEGÚN TU PREFERENCIA!</p>
 
+      <!-- Banner horizontal SOLO para celular -->
+      <div class="banner-horizontal">
+        <img src="img/banner-horizontal.jpg" alt="Banner">
+      </div>
+
       <div class="controls">
         <div class="buttons">
           <button id="domingo" class="active" onclick="sortTable(0, this)">Domingo</button>
@@ -229,7 +284,11 @@
         </div>
         <input type="text" id="buscador" placeholder="Buscar conjunto ...">
       </div>
-       <div class="table-container">
+
+      <div class="banners-laterales">
+        <img src="img/banner-izq.jpg" class="banner-vertical izquierda" alt="Banner Izq">
+
+        <div class="table-container">
         <table id="otrosTable">
           <thead>
             <tr>
@@ -252,6 +311,8 @@
             <tr><td class="hidden">81</td><td class="hidden">30</td><td class="hidden">130</td><td class="hidden">OTROS</td><td>81</td><td>30</td><td></td><td><a href="otros\manco-capac-3.html">CONJUNTO CLASIFICADO SALIDA DE MANCO CAPAC Y MAMA OCLLO 2025</a></td></tr>
           </tbody>
         </table>
+        </div>
+        <img src="img/banner-der.jpg" class="banner-vertical derecha" alt="Banner Der">
       </div>
     </section>
   </main>
