@@ -106,7 +106,7 @@
     }
 
     .campo {
-      width: 100px; /* ancho fijo para alinear */
+      width: 125px; /* ancho fijo para alinear */
       text-align: left;
       font-weight: lighter;
       color: black;
