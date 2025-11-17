@@ -177,7 +177,7 @@
 .banner-accesorios {
   width: 100%;
   max-width: 1200px;          /* igual que el ancho visual de la lista */
-  margin: 20px auto;          /* separación arriba/abajo y centrado */
+  margin: 0 auto;          /* separación arriba/abajo y centrado */
 }
 
 .banner-accesorios img {
@@ -190,7 +190,15 @@
 /* En celular, que coincida con el ancho de cada card */
 @media (max-width: 768px) {
   .banner-accesorios {
-    width: 92%;
-    max-width: 92%;
+    width: 95%;
+    max-width: 95%;
+  }
+}
+
+/* En laptop, que coincida con el ancho de cada card */
+@media (min-width: 768px) {
+  .banner-accesorios {
+    width: 48%;
+    max-width: 48%;
   }
 }
