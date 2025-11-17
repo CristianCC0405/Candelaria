@@ -173,14 +173,14 @@
   }
 }
 
-/* === BANNER ESPECIAL ACCESORIOS === */
-.banner-accesorios {
+/* === BANNER ESPECIAL PUBLICIDAD === */
+.banner-publicidad {
   width: 100%;
   max-width: 1200px;          /* igual que el ancho visual de la lista */
   margin: 0 auto;          /* separación arriba/abajo y centrado */
 }
 
-.banner-accesorios img {
+.banner-publicidad img {
   width: 100%;
   height: auto;
   border-radius: 12px;
@@ -189,7 +189,7 @@
 
 /* En celular, que coincida con el ancho de cada card */
 @media (max-width: 768px) {
-  .banner-accesorios {
+  .banner-publicidad {
     width: 95%;
     max-width: 95%;
   }
@@ -197,7 +197,7 @@
 
 /* En laptop, que coincida con el ancho de cada card */
 @media (min-width: 768px) {
-  .banner-accesorios {
+  .banner-publicidad {
     width: 48%;
     max-width: 48%;
   }
