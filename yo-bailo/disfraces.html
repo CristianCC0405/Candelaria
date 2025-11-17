@@ -183,6 +183,46 @@
     <p>#CANDELARIA2026</p>
     <p>bailaencandelaria@gmail.com</p>
   </footer>
+ 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const contenedor = document.querySelector('.lista-negocios');
+  const negocios = Array.from(contenedor.children);
+
+  // 🔥 Aquí defines las imágenes de los negocios que quieres fijar arriba
+  const imagenesFijas = [
+    "../img/disfraces/img-2.jpg", //imagen en segundo orden
+    "../img/disfraces/img-1.jpg"  //imagen en primer orden
+  ];
+
+  let fijos = [];
+  let restantes = [];
+
+  // Clasificamos los negocios
+  negocios.forEach(negocio => {
+    const img = negocio.querySelector("img").getAttribute("src");
+
+    if (imagenesFijas.includes(img)) {
+      fijos.push(negocio);      // Va al inicio SI O SI
+    } else {
+      restantes.push(negocio);  // Se mezcla
+    }
+  });
+
+  // Mezcla aleatoria de los demás
+  restantes.sort(() => Math.random() - 0.5);
+
+  // Limpiamos contenedor
+  contenedor.innerHTML = "";
+
+  // Agregamos primero los fijos (en el orden que pusiste arriba)
+  fijos.forEach(n => contenedor.appendChild(n));
+
+  // Luego los restantes mezclados
+  restantes.forEach(n => contenedor.appendChild(n));
+});
+</script>
+
 
   <script src="../js/script.js"></script>
 </body>

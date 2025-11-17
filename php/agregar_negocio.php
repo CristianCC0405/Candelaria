@@ -26,79 +26,164 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (!$titulo || !$grupo || !$categoria) $errors[] = "Completa título, grupo y categoría.";
   if (mb_strlen($titulo) > 100) $errors[] = "Título demasiado largo.";
 
-  // Recoger campos según categoría
   $campos = [];
-  // todos los campos que quieras recibir vienen en POST con nombres predecibles
-  // ej: ciudad,direccion,whatsapp,tiktok,instagram,ubicacion,desde,hasta,de,a,vehiculo...
   foreach ($_POST as $k=>$v) {
     if (in_array($k, ['titulo','grupo','categoria'])) continue;
     $campos[$k] = trim($v);
   }
 
-  // Validaciones específicas
   if (isset($campos['whatsapp']) && !validar_whatsapp($campos['whatsapp'])) $errors[] = "WhatsApp debe tener 9 dígitos sin espacios.";
   if (isset($campos['desde']) && !validar_precio($campos['desde'])) $errors[] = "Precio Desde inválido.";
   if (isset($campos['hasta']) && !validar_precio($campos['hasta'])) $errors[] = "Precio Hasta inválido.";
 
-  // Limitar longitud y capitalizar campos de texto
   foreach ($campos as $k=>$v) {
     $v = mb_substr($v,0,25);
-    // capitalizar palabras salvo los enlaces y números y campos tipo whatsapp
     if (!in_array($k, ['whatsapp','tiktok','instagram','desde','hasta','de','a'])) {
       $v = capitalizar($v);
     }
     $campos[$k] = $v;
   }
 
-  // Manejo de imagen subida
   $image_path = null;
   if (!empty($_FILES['imagen']['name'])) {
-    $categoria_folder = strtolower(str_replace(' ', '', $categoria)); // ej: Disfraces -> disfraces
+    $categoria_folder = strtolower(str_replace(' ', '', $categoria));
     $carpeta = __DIR__ . "/../img/{$categoria_folder}/";
     $nombre_archivo = siguiente_nombre_img($carpeta, 'img');
     $dest = $carpeta . $nombre_archivo;
 
-    // Validar tipo y tamaño (por ejemplo hasta 3MB)
     $allowed = ['image/jpeg','image/jpg','image/png'];
     if (!in_array($_FILES['imagen']['type'], $allowed)) $errors[] = "Formato de imagen no permitido.";
     if ($_FILES['imagen']['size'] > 3 * 1024 * 1024) $errors[] = "Imagen demasiado grande (máx 3MB).";
 
     if (empty($errors)) {
-      // convertir a jpg si viene png? aquí movemos tal cual (mejor guardar extension original)
       move_uploaded_file($_FILES['imagen']['tmp_name'], $dest);
-      // ruta relativa para DB
       $image_path = "img/{$categoria_folder}/{$nombre_archivo}";
     }
   }
 
   if (empty($errors)) {
-    $stmt = $pdo->prepare("INSERT INTO negocios (user_id, titulo, grupo, categoria, campos_json, imagen) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$user_id, capitalizar($titulo), $grupo, $categoria, json_encode($campos, JSON_UNESCAPED_UNICODE), $image_path]);
+    $stmt = $pdo->prepare("INSERT INTO negocios (user_id, titulo, grupo, categoria, campos_json, imagen) 
+                           VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([
+      $user_id,
+      capitalizar($titulo),
+      $grupo,
+      $categoria,
+      json_encode($campos, JSON_UNESCAPED_UNICODE),
+      $image_path
+    ]);
     $success = true;
   }
 }
 ?>
-<!doctype html><html><head><meta charset="utf-8"><title>Agregar negocio</title></head><body>
-<h2>Agregar negocio</h2>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Agregar negocio</title>
+
+<!-- Tus estilos globales -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/disfraces.css">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+<style>
+  body { font-family: 'Lato', sans-serif; }
+
+  .form-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 25px;
+    border: 2px solid #7f6000;
+    border-radius: 16px;
+    background: #fffaf0;
+    text-align: center;
+  }
+
+  h2 {
+    color: #7f6000;
+    margin-bottom: 20px;
+    font-size: 28px;
+    text-align: center;
+  }
+
+  input, select {
+    width: 90%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 1px solid #bbb;
+    font-size: 16px;
+  }
+
+  button {
+    padding: 12px 25px;
+    background: #7f6000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  button:hover {
+    background: #a18400;
+  }
+
+  .msg {
+    background: #def;
+    border: 1px solid #9ab;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+  }
+
+  .msg-error {
+    color: red;
+    margin-bottom: 10px;
+  }
+
+</style>
+</head>
+
+<body>
+
+<section id="disfraces">
+  <h1>AGREGAR NEGOCIO</h1>
+  <p style="font-weight:300;">Publica tu negocio en #CANDELARIA2026</p>
+</section>
+
+<div class="form-container">
+
 <?php if ($success): ?>
-  <div style="background:#def;border:1px solid #9ab;padding:10px;position:relative;">
-    TU ANUNCIO HA SIDO PUBLICADO EN UN ORDEN ALEATORIO.
-    SI QUIERES QUE SIEMPRE APAREZCA EN PRIMER ORDEN ESCRIBE A: <strong>bailaencandelaria@gmail.com</strong>
-    <button onclick="this.parentElement.style.display='none'" style="float:right">X</button>
+  <div class="msg">
+    TU ANUNCIO HA SIDO PUBLICADO EN UN ORDEN ALEATORIO.<br>
+    SI QUIERES QUE APAREZCA PRIMERO ESCRIBE A: <strong>bailaencandelaria@gmail.com</strong>
+    <button onclick="this.parentElement.style.display='none'" style="float:right;">X</button>
   </div>
 <?php endif; ?>
-<?php if (!empty($errors)): foreach ($errors as $e): ?><div style="color:red"><?=htmlspecialchars($e)?></div><?php endforeach; endif; ?>
+
+<?php if (!empty($errors)): ?>
+  <?php foreach ($errors as $e): ?>
+    <div class="msg-error"><?= htmlspecialchars($e) ?></div>
+  <?php endforeach; ?>
+<?php endif; ?>
 
 <form method="post" enctype="multipart/form-data">
-  <input name="titulo" placeholder="Título" value="<?=htmlspecialchars($_POST['titulo'] ?? '')?>" required><br>
+
+  <input name="titulo" placeholder="Título" 
+         value="<?=htmlspecialchars($_POST['titulo'] ?? '')?>" required>
 
   <label>Grupo</label>
   <select name="grupo" id="grupo" required>
     <option value="">--</option>
-    <?php foreach ($grupos as $k=>$v): $sel = (($_POST['grupo'] ?? '')==$k)?'selected':''; ?>
+    <?php foreach ($grupos as $k=>$v):
+      $sel = (($_POST['grupo'] ?? '')==$k)?'selected':''; ?>
       <option value="<?=htmlspecialchars($k)?>" <?=$sel?>><?=htmlspecialchars($v)?></option>
     <?php endforeach;?>
-  </select><br>
+  </select>
 
   <label>Categoría</label>
   <select name="categoria" id="categoria" required>
@@ -107,43 +192,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $gsel = $_POST['grupo'] ?? '';
       if ($gsel && isset($categorias[$gsel])):
         foreach ($categorias[$gsel] as $cat):
-          $sel = (($_POST['categoria'] ?? '')==$cat)?'selected':'';
-          echo "<option value=\"".htmlspecialchars($cat)."\" $sel>".htmlspecialchars($cat)."</option>";
-        endforeach;
+          $sel = (($_POST['categoria'] ?? '')==$cat)?'selected':''; ?>
+          <option value="<?=htmlspecialchars($cat)?>" <?=$sel?>><?=htmlspecialchars($cat)?></option>
+        <?php endforeach;
       endif;
     ?>
-  </select><br>
+  </select>
 
-  <!-- Aquí generamos campos simples; ideal: usar JS para cambiar según categoría del desplegable -->
-  <!-- Ejemplo básico de campos comunes -->
-  Ciudad: <input name="ciudad" value="<?=htmlspecialchars($_POST['ciudad'] ?? '')?>"><br>
-  Dirección: <input name="direccion" value="<?=htmlspecialchars($_POST['direccion'] ?? '')?>"><br>
-  WhatsApp: <input name="whatsapp" value="<?=htmlspecialchars($_POST['whatsapp'] ?? '')?>" maxlength="9"><br>
-  TikTok: <input name="tiktok" value="<?=htmlspecialchars($_POST['tiktok'] ?? '')?>"><br>
-  Instagram: <input name="instagram" value="<?=htmlspecialchars($_POST['instagram'] ?? '')?>"><br>
-  Desde S/.: <input name="desde" value="<?=htmlspecialchars($_POST['desde'] ?? '')?>" maxlength="3"><br>
-  Hasta S/.: <input name="hasta" value="<?=htmlspecialchars($_POST['hasta'] ?? '')?>" maxlength="3"><br>
+  Ciudad: <input name="ciudad" value="<?=htmlspecialchars($_POST['ciudad'] ?? '')?>">
+  Dirección: <input name="direccion" value="<?=htmlspecialchars($_POST['direccion'] ?? '')?>">
+  WhatsApp: <input name="whatsapp" maxlength="9"
+                   value="<?=htmlspecialchars($_POST['whatsapp'] ?? '')?>">
+  TikTok: <input name="tiktok" value="<?=htmlspecialchars($_POST['tiktok'] ?? '')?>">
+  Instagram: <input name="instagram" value="<?=htmlspecialchars($_POST['instagram'] ?? '')?>">
+  Desde S/.: <input name="desde" maxlength="3"
+                    value="<?=htmlspecialchars($_POST['desde'] ?? '')?>">
+  Hasta S/.: <input name="hasta" maxlength="3"
+                    value="<?=htmlspecialchars($_POST['hasta'] ?? '')?>">
 
-  Imagen (jpg/png) : <input type="file" name="imagen" accept="image/jpeg,image/png"><br>
+  Imagen (jpg/png):  
+  <input type="file" name="imagen" accept="image/jpeg, image/png">
 
   <button type="submit">PUBLICAR</button>
+
 </form>
+</div>
 
 <script>
-// Para mejorar UX: cambiar las opciones de 'categoria' según 'grupo' sin recargar
 const categoriasMap = <?=json_encode($categorias, JSON_UNESCAPED_UNICODE)?>;
 document.getElementById('grupo').addEventListener('change', function(){
   const g = this.value;
   const select = document.getElementById('categoria');
   select.innerHTML = '<option value="">--</option>';
   if (categoriasMap[g]) {
-    categoriasMap[g].forEach(c=> {
-      const o = document.createElement('option');
-      o.value = c; o.textContent = c;
+    categoriasMap[g].forEach(c=>{
+      const o=document.createElement('option');
+      o.value=c; o.textContent=c;
       select.appendChild(o);
     });
   }
 });
 </script>
 
-</body></html>
+</body>
+</html>

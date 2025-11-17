@@ -169,33 +169,51 @@
       </div>
 
     </section>
-
-    <div style="text-align:center; margin: 40px 0;">
-      <a href="../php/login.php"
-        style="color:#000; font-weight:bold; font-size:18px; text-decoration:none;">
-        HAZ CLIC - AQUI -<br>PARA PUBLICAR TU NEGOCIO
-      </a>
-    </div>
-
+ 
   </main>
 
   <footer>
     <p>#CANDELARIA2026</p>
     <p>bailaencandelaria@gmail.com</p>
   </footer>
+ 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const contenedor = document.querySelector('.lista-negocios');
+  const negocios = Array.from(contenedor.children);
 
-  <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const contenedor = document.querySelector('.lista-negocios');
-    const negocios = Array.from(contenedor.children);
+  // 🔥 Aquí defines las imágenes de los negocios que quieres fijar arriba
+  const imagenesFijas = [
+    "../img/costura/img-2.jpg", //imagen en segundo orden
+    "../img/costura/img-1.jpg"  //imagen en primer orden
+  ];
 
-    // Mezcla aleatoriamente los elementos
-    const negociosMezclados = negocios.sort(() => Math.random() - 0.5);
+  let fijos = [];
+  let restantes = [];
 
-    // Limpia el contenedor y vuelve a agregar los elementos en orden aleatorio
-    contenedor.innerHTML = '';
-    negociosMezclados.forEach(negocio => contenedor.appendChild(negocio));
+  // Clasificamos los negocios
+  negocios.forEach(negocio => {
+    const img = negocio.querySelector("img").getAttribute("src");
+
+    if (imagenesFijas.includes(img)) {
+      fijos.push(negocio);      // Va al inicio SI O SI
+    } else {
+      restantes.push(negocio);  // Se mezcla
+    }
   });
+
+  // Mezcla aleatoria de los demás
+  restantes.sort(() => Math.random() - 0.5);
+
+  // Limpiamos contenedor
+  contenedor.innerHTML = "";
+
+  // Agregamos primero los fijos (en el orden que pusiste arriba)
+  fijos.forEach(n => contenedor.appendChild(n));
+
+  // Luego los restantes mezclados
+  restantes.forEach(n => contenedor.appendChild(n));
+});
 </script>
 
 
