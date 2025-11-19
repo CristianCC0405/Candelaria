@@ -174,31 +174,28 @@
 }
 
 /* === BANNER ESPECIAL PUBLICIDAD === */
-.banner-publicidad {
-  width: 100%;
-  max-width: 1200px;          /* igual que el ancho visual de la lista */
-  margin: 0 auto;          /* separación arriba/abajo y centrado */
+/* Desktop / Laptop */
+@media (min-width: 769px) {
+  .banner-publicidad {
+    width: 48%;
+    max-width: 48%;
+    margin: 0 auto;
+  }
 }
 
+/* Celular */
+@media (max-width: 768px) {
+  .banner-publicidad {
+    width: 90%;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+
+/* Estilo base (por si acaso) */
 .banner-publicidad img {
   width: 100%;
   height: auto;
   border-radius: 12px;
   display: block;
-}
-
-/* En celular, que coincida con el ancho de cada card */
-@media (max-width: 768px) {
-  .banner-publicidad {
-    width: 95%;
-    max-width: 95%;
-  }
-}
-
-/* En laptop, que coincida con el ancho de cada card */
-@media (min-width: 768px) {
-  .banner-publicidad {
-    width: 48%;
-    max-width: 48%;
-  }
 }
