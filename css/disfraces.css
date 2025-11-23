@@ -134,6 +134,21 @@
       color: black;
     }
 
+    .valor a {
+      color: #1a0dab;
+      font-weight: lighter;
+    }
+
+    .valor a:visited {
+      color: #1a0dab;
+      font-weight: lighter;
+    }
+
+    .valor a:hover {
+      text-decoration: underline;
+      font-weight: bolder;
+    }
+
 
 /* Animación */
 @keyframes fadeIn {
