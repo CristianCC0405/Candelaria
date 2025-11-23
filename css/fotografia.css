@@ -96,9 +96,13 @@
       flex-direction: column;
       gap: 4px;
       margin-top: 5px;
-      padding-left: 0px;
+      padding-left: 0px;;
     }
-
+    @media (min-width: 769px) {
+      .alineado {
+        width: 320px;
+      }
+    }
     .fila {
       display: flex;
       align-items: baseline;
@@ -114,7 +118,7 @@
 
     .valor::before {
       content: ": ";
-      margin-left: 2px;
+      margin-left: 15px;
     }
 
     .valor {
