@@ -96,7 +96,7 @@
       flex-direction: column;
       gap: 4px;
       margin-top: 5px;
-      padding-left: 0px;;
+      padding-left: 0px
     }
     @media (min-width: 769px) {
       .alineado {
