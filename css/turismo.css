@@ -96,9 +96,22 @@
       flex-direction: column;
       gap: 4px;
       margin-top: 5px;
-      padding-left: 0px;
+      padding-left: 0px
     }
-
+    @media (min-width: 769px) {
+      .alineado {
+        width: 320px;
+        text-align: left;
+      }
+      .campo {
+        width: 88px;
+      }
+    }
+    @media (max-width: 768px) {
+      .campo {
+        width: 50px;
+      }
+    }
     .fila {
       display: flex;
       align-items: baseline;
@@ -106,7 +119,6 @@
     }
 
     .campo {
-      width: 50px; /* ancho fijo para alinear */
       text-align: left;
       font-weight: lighter;
       color: black;
