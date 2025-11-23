@@ -107,6 +107,11 @@
         width: 88px;
       }
     }
+    @media (max-width: 768px) {
+      .campo {
+        width: 50px;
+      }
+    }
     .fila {
       display: flex;
       align-items: baseline;
@@ -114,7 +119,6 @@
     }
 
     .campo {
-      width: 50px; /* ancho fijo para alinear */
       text-align: left;
       font-weight: lighter;
       color: black;
