@@ -134,15 +134,15 @@
       color: black;
     }
     .valor a {
-      color: #000;              /* Color del enlace normal */
+      color: #000;
     }
 
     .valor a:visited {
-      color: #000;              /* Evita el color morado */
+      color: #000;
     }
 
     .valor a:hover {
-      text-decoration: underline; /* Opcional, efecto al pasar el mouse */
+      text-decoration: underline;
     }
 
 
