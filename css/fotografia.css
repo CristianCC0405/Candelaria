@@ -102,6 +102,9 @@
       .alineado {
         width: 320px;
       }
+      .campo {
+        width: 90px;
+      }
     }
     .fila {
       display: flex;
@@ -118,7 +121,7 @@
 
     .valor::before {
       content: ": ";
-      margin-left: 15px;
+      margin-left: 2px;
     }
 
     .valor {
