@@ -1,11 +1,11 @@
 
 /* SECCIÓN BORDADOS */
-#bordados {
+#serigrafia {
   text-align: center;
   padding: 0px 10px;
 }
 
-#bordados h1 {
+#serigrafia h1 {
   color: #7f6000;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -13,7 +13,7 @@
   font-size: 50px;
 }
 
-#bordados p {
+#serigrafia p {
   color: #555;
   margin-bottom: 30px;
   font-size: 20px;
@@ -21,7 +21,7 @@
 
 /* Responsivo */
 @media (max-width: 768px) {
-  #bordados h1 {
+  #serigrafia h1 {
     font-size: 30px;
   }
 }
@@ -169,10 +169,10 @@
   .imagen-derecha {
     margin-top: 10px;
   }
-  #bordados {
+  #serigrafia {
     padding: 0px 10px;
   }
-  #bordados h1 {
+  #serigrafia h1 {
     font-size: 45px;
   }
 }
