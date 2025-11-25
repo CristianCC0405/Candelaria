@@ -11,7 +11,7 @@ $user_id = $_SESSION['user_id'];
 
 $grupos = ['Yo Baila'=>'Yo Baila','Yo Veo'=>'Yo Veo'];
 $categorias = [
-  'Yo Baila' => ['Disfraces','Otros','Bordados','Accesorios','Fotografia','Belleza','Joyeria','Costura'],
+  'Yo Baila' => ['Disfraces','Otros','Serigrafia','Accesorios','Fotografia','Belleza','Joyeria','Costura'],
   'Yo Veo'   => ['Asientos','Eventos','Turismo','Merchandising','Bebidas','Alimentacion','Transporte','Alojamiento']
 ];
 
