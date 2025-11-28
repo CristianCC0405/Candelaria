@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="icon" href="../img/favicon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/disfraces.css"> <!-- para mantener coherencia -->
+  <link rel="stylesheet" href="../css/trajes.css"> <!-- para mantener coherencia -->
   
   <style>
     /* Ajustes visuales del formulario (igual estilo del sitio) */
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <!-- === CONTENIDO CENTRAL === -->
   <main>
-    <section id="disfraces">
+    <section id="trajes">
       <h1>INICIAR SESIÓN</h1>
       <p>Accede para publicar o editar tus negocios.</p>
     </section>

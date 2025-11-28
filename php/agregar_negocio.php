@@ -11,7 +11,7 @@ $user_id = $_SESSION['user_id'];
 
 $grupos = ['Yo Baila'=>'Yo Baila','Yo Veo'=>'Yo Veo'];
 $categorias = [
-  'Yo Baila' => ['Disfraces','Otros','Serigrafia','Accesorios','Fotografia','Belleza','Joyeria','Costura'],
+  'Yo Baila' => ['Trajes','Otros','Serigrafia','Accesorios','Fotografia','Belleza','Joyeria','Costura'],
   'Yo Veo'   => ['Asientos','Eventos','Turismo','Merchandising','Bebidas','Alimentacion','Transporte','Alojamiento']
 ];
 
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!-- Tus estilos globales -->
 <link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/disfraces.css">
+<link rel="stylesheet" href="../css/trajes.css">
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
 <style>
@@ -150,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
-<section id="disfraces">
+<section id="trajes">
   <h1>AGREGAR NEGOCIO</h1>
   <p style="font-weight:300;">Publica tu negocio en #CANDELARIA2026</p>
 </section>

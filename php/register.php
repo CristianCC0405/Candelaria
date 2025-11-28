@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/disfraces.css">
+  <link rel="stylesheet" href="../css/trajes.css">
 
   <style>
     .register-box {
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </header>
 
   <main>
-    <section id="disfraces">
+    <section id="trajes">
       <h1>CREAR<br>CUENTA</h1>
       <p style="font-weight: lighter;">Regístrate para publicar o editar tus negocios.</p>
     </section>
